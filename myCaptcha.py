@@ -104,15 +104,17 @@ class MyCaptcha(ImageCaptcha):
         return image
 
 if __name__ == "__main__":
+    img_dir = "./asset/imgset/"
     image = MyCaptcha()
-    data = image.generate('1234')
-    image.write('1234', 'out.png')
-    x = cv2.imread("out.png")
-    x = cv2.resize(x, (0, 0), fx=4, fy=4)
+    for i in range(10):
+        data = image.generate('1234')
+        image.write('1234', img_dir+'%s.png' % i)
+    # x = cv2.imread("out.png")
+    # x = cv2.resize(x, (0, 0), fx=4, fy=4)
 
-    for l in getposlist:
-        cv2.rectangle(x, (l[0]*4, l[1]*4), ((l[0]+l[2])*4, (l[1]+l[3])*4), (255, 0, 0),  thickness=False)
-
-    cv2.imshow('image', x)
-    cv2.waitKey()
+    # for l in getposlist:
+    #     cv2.rectangle(x, (l[0]*4, l[1]*4), ((l[0]+l[2])*4, (l[1]+l[3])*4), (255, 0, 0),  thickness=False)
+    #
+    # cv2.imshow('image', x)
+    # cv2.waitKey()
 

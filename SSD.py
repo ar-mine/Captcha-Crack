@@ -1,4 +1,4 @@
-from mxnet import autograd, contrib, gluon, image, init, np, npx, ndarray as nd
+from mxnet import autograd, contrib, gluon, image, init, np, npx
 from mxnet.gluon import nn
 import mxnet as mx
 import os
@@ -52,30 +52,41 @@ def show_bboxes(axes, bboxes, labels=None, colors=None):
                         bbox=dict(facecolor=color, lw=0))
 
 
-def load_data_pikachu(batch_size, edge_size=256):
+# def load_data_pikachu(batch_size, edge_size=256):
+#     """Load the pikachu dataset"""
+#     data_dir = './asset/dataset'
+#     train_iter = image.ImageDetIter(
+#         path_imgrec=os.path.join(data_dir, 'train.rec'),
+#         path_imgidx=os.path.join(data_dir, 'train.idx'),
+#         batch_size=batch_size,
+#         data_shape=(3, edge_size, edge_size),  # The shape of the output image
+#         shuffle=True,   # Read the dataset in random order
+#         rand_crop=1,    # The probability of random cropping is 1
+#         min_object_covered=0.95, max_attempts=200)
+#     val_iter = image.ImageDetIter(
+#         path_imgrec=os.path.join(data_dir, 'val.rec'),
+#         batch_size=batch_size,
+#         data_shape=(3, edge_size, edge_size),
+#         shuffle=False)
+#     return train_iter, val_iter
+def load_data_pikachu(batch_size):
     """Load the pikachu dataset"""
-    data_dir = './asset/dataset'
+    data_dir = './'
     train_iter = image.ImageDetIter(
-        path_imgrec=os.path.join(data_dir, 'train.rec'),
-        path_imgidx=os.path.join(data_dir, 'train.idx'),
+        path_imgrec=os.path.join(data_dir, 'test.rec'),
+        path_imgidx=os.path.join(data_dir, 'test.idx'),
         batch_size=batch_size,
-        data_shape=(3, edge_size, edge_size),  # The shape of the output image
         shuffle=True,   # Read the dataset in random order
-        rand_crop=1,    # The probability of random cropping is 1
-        min_object_covered=0.95, max_attempts=200)
-    val_iter = image.ImageDetIter(
-        path_imgrec=os.path.join(data_dir, 'val.rec'),
-        batch_size=batch_size,
-        data_shape=(3, edge_size, edge_size),
-        shuffle=False)
-    return train_iter, val_iter
+        data_shape=(3, 160, 60)
+    )
+    return train_iter
 
-
-batch_size, edge_size = 32, 256
-train_iter, _ = load_data_pikachu(batch_size, edge_size)
+batch_size = 2
+train_iter = load_data_pikachu(batch_size)
 batch = train_iter.next()
-# print(batch.data[0].shape, batch.label[0].shape)
+print(batch.data[0].shape, batch.label[0].shape)
 
+'''
 imgs = (batch.data[0][0:10].transpose(0, 2, 3, 1)) / 255
 axes = show_images(imgs, 2, 5, scale=2)
 for ax, label in zip(axes, batch.label[0][0:10]):
@@ -311,3 +322,5 @@ def display(img, output, threshold):
         show_bboxes(fig.axes, bbox, '%.2f' % score, 'w')
         display(img, output, threshold=0.3)
 output = predict(X)
+
+'''
