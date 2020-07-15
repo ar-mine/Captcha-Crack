@@ -58,13 +58,25 @@ def cv_showtxt(img, text, org, color, fontFace=cv.FONT_HERSHEY_SIMPLEX, fontScal
                fontScale=fontScale, color=color, thickness=thickness)
 
 
+def cv_multishow(imglist, row, column):
+    max_w, max_h = 0, 0
+    for img in imglist:
+        if img.shape[1] > max_w:
+            max_w = img.shape[1]
+        if img.shape[0] > max_h:
+            max_h = img.shape[0]
+    mulimg = np.zeros((max_h*row, max_w*column, 3)).astype(np.uint8)
+    for i, img in enumerate(imglist):
+        mulimg[int(i/column)*max_h:int(i/column)*max_h+img.shape[0], int(i%column)*max_w:(i%column)*max_w+img.shape[1], :] = img
+    return mulimg
+
 # cv_rectangle_normalized(img, ground_truth[:, 1:], ["dog", "cat"])
 #
 # cv.imshow('img', img)
 # cv.waitKey(0)
 # cv.destroyAllWindows()
 
-labels = npx.multibox_target(np.expand_dims(anchors, axis=0),
-                            np.expand_dims(ground_truth, axis=0),
-                            np.zeros((1, 3, 5)))
+# labels = npx.multibox_target(np.expand_dims(anchors, axis=0),
+#                             np.expand_dims(ground_truth, axis=0),
+#                             np.zeros((1, 3, 5)))
 

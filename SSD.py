@@ -4,52 +4,54 @@ import mxnet as mx
 import os
 import matplotlib.pyplot as plt
 import time
+import cv2 as cv
+import armine as am
 
 npx.set_np()
 
 
-def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
-    """Plot a list of images."""
-    figsize = (num_cols * scale, num_rows * scale)
-    _, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
-    axes = axes.flatten()
-    for i, (ax, img) in enumerate(zip(axes, imgs)):
-        ax.imshow(img.asnumpy())
-        ax.axes.get_xaxis().set_visible(False)
-        ax.axes.get_yaxis().set_visible(False)
-        if titles:
-            ax.set_title(titles[i])
-    return axes
-
-
-def bbox_to_rect(bbox, color):
-    """Convert bounding box to matplotlib format."""
-    # Convert the bounding box (top-left x, top-left y, bottom-right x,
-    # bottom-right y) format to matplotlib format: ((upper-left x,
-    # upper-left y), width, height)
-    return plt.Rectangle(xy=(bbox[0], bbox[1]), width=bbox[2]-bbox[0], height=bbox[3]-bbox[1],
-                        fill=False, edgecolor=color, linewidth=2)
-
-
-def show_bboxes(axes, bboxes, labels=None, colors=None):
-    """Show bounding boxes."""
-    def _make_list(obj, default_values=None):
-        if obj is None:
-            obj = default_values
-        elif not isinstance(obj, (list, tuple)):
-            obj = [obj]
-        return obj
-    labels = _make_list(labels)
-    colors = _make_list(colors, ['b', 'g', 'r', 'm', 'c'])
-    for i, bbox in enumerate(bboxes):
-        color = colors[i % len(colors)]
-        rect = bbox_to_rect(bbox.asnumpy(), color)
-        axes.add_patch(rect)
-        if labels and len(labels) > i:
-            text_color = 'k' if color == 'w' else 'w'
-            axes.text(rect.xy[0], rect.xy[1], labels[i],
-                        va='center', ha='center', fontsize=9, color=text_color,
-                        bbox=dict(facecolor=color, lw=0))
+# def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
+#     """Plot a list of images."""
+#     figsize = (num_cols * scale, num_rows * scale)
+#     _, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
+#     axes = axes.flatten()
+#     for i, (ax, img) in enumerate(zip(axes, imgs)):
+#         ax.imshow(img.asnumpy())
+#         ax.axes.get_xaxis().set_visible(False)
+#         ax.axes.get_yaxis().set_visible(False)
+#         if titles:
+#             ax.set_title(titles[i])
+#     return axes
+#
+#
+# def bbox_to_rect(bbox, color):
+#     """Convert bounding box to matplotlib format."""
+#     # Convert the bounding box (top-left x, top-left y, bottom-right x,
+#     # bottom-right y) format to matplotlib format: ((upper-left x,
+#     # upper-left y), width, height)
+#     return plt.Rectangle(xy=(bbox[0], bbox[1]), width=bbox[2]-bbox[0], height=bbox[3]-bbox[1],
+#                         fill=False, edgecolor=color, linewidth=2)
+#
+#
+# def show_bboxes(axes, bboxes, labels=None, colors=None):
+#     """Show bounding boxes."""
+#     def _make_list(obj, default_values=None):
+#         if obj is None:
+#             obj = default_values
+#         elif not isinstance(obj, (list, tuple)):
+#             obj = [obj]
+#         return obj
+#     labels = _make_list(labels)
+#     colors = _make_list(colors, ['b', 'g', 'r', 'm', 'c'])
+#     for i, bbox in enumerate(bboxes):
+#         color = colors[i % len(colors)]
+#         rect = bbox_to_rect(bbox.asnumpy(), color)
+#         axes.add_patch(rect)
+#         if labels and len(labels) > i:
+#             text_color = 'k' if color == 'w' else 'w'
+#             axes.text(rect.xy[0], rect.xy[1], labels[i],
+#                         va='center', ha='center', fontsize=9, color=text_color,
+#                         bbox=dict(facecolor=color, lw=0))
 
 
 # def load_data_pikachu(batch_size, edge_size=256):
@@ -81,20 +83,24 @@ def load_data_pikachu(batch_size):
     )
     return train_iter
 
-batch_size = 2
+batch_size = 5
 train_iter = load_data_pikachu(batch_size)
 batch = train_iter.next()
 print(batch.data[0].shape, batch.label[0].shape)
 
-'''
-imgs = (batch.data[0][0:10].transpose(0, 2, 3, 1)) / 255
-axes = show_images(imgs, 2, 5, scale=2)
-for ax, label in zip(axes, batch.label[0][0:10]):
-    show_bboxes(ax, [label[0][1:5] * edge_size], colors=['w'])
+
+imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
+show = am.cv_multishow(imgs, 2, 2)
+cv.imshow('img', show)
+cv.waitKey(0)
+cv.destroyAllWindows()
+# axes = show_images(imgs, 2, 5, scale=2)
+# for ax, label in zip(axes, batch.label[0][0:10]):
+#     show_bboxes(ax, [label[0][1:5] * edge_size], colors=['w'])
 
 # plt.show()
 
-
+'''
 def cls_predictor(num_anchors, num_classes):
     return nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3, padding=1)
 

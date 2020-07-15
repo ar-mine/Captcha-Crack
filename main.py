@@ -1,32 +1,22 @@
-import mxnet as mx
-from cnn import CNN
+import myCaptcha as cha
+import im2rec as i2r
+
+if __name__ == "__main__":
+    '''******************************  Step-1 Generate images and labels  *********************************'''
+    img_dir = "./asset/imgset/"
+
+    cap = cha.MyCaptcha()
+    for i in range(5):
+        cap.write('1', img_dir+'%s.png' % i)
+    poslist = cap.poslist
+
+    '''******************************  Step-2 Compress images set to RecordIO file  ***********************'''
+    rec = i2r.Im2rec(img_path=img_dir, save_path="./", fname="test")
+    rec.save_file(poslist)
 
 
-batch_size = 128
-
-alexnet = CNN(net_name=1, data_name=1, batch_size=batch_size)
-
-# alexnet.test(224)
-alexnet.train(lr=0.01, num_epochs=10, ctx=alexnet.ctx)
-
-
-def predict():
-    # load model
-    sym, arg_params, aux_params = mx.model.load_checkpoint("fashion_mnist", 1)  # load with net name and epoch num
-    mod = mx.mod.Module(symbol=sym, context=mx.gpu(0), data_names=["data"], label_names=[])  # label can be empty
-    mod.bind(for_training=False, data_shapes=[("data", (1, 2))])  # data shape, 1 x 2 vector for one test data record
-    mod.set_params(arg_params, aux_params)
-
-    # predict
-    #predict_stress = mod.predict(eval_iter, num_batch=1)
-
-    #return predict_stress
-
-
-'''******************************  Step-1 Generate images and labels  *********************************'''
-'''******************************  Step-2 Compress images set to RecordIO file  ***********************'''
-'''*****************************************************************************************'''
-'''*****************************************************************************************'''
-'''*****************************************************************************************'''
-'''*****************************************************************************************'''
-'''*****************************************************************************************'''
+    '''*****************************************************************************************'''
+    '''*****************************************************************************************'''
+    '''*****************************************************************************************'''
+    '''*****************************************************************************************'''
+    '''*****************************************************************************************'''

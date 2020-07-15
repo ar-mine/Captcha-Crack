@@ -1,10 +1,9 @@
 from captcha.image import ImageCaptcha
-import cv2
 import os
 import random
 from PIL import Image
 from PIL.ImageDraw import Draw
-
+import cv2 as cv
 
 table = []
 for i in range(256):
@@ -13,10 +12,15 @@ for i in range(256):
 DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'asset', 'font')
 DEFAULT_FONTS = [os.path.join(DATA_DIR, 'DroidSansMono.ttf')]
 
-getposlist = []
-
 
 class MyCaptcha(ImageCaptcha):
+    def __init__(self, width=160, height=60, fonts=None, font_sizes=None):
+        self._width = width
+        self._height = height
+        self._fonts = fonts or DEFAULT_FONTS
+        self._font_sizes = font_sizes or (42, 50, 56)
+        self._truefonts = []
+        self.poslist = []
 
     def create_captcha_image(self, chars, color, background):
         """Create the CAPTCHA image itself.
@@ -99,22 +103,25 @@ class MyCaptcha(ImageCaptcha):
                 l[0] = int(l[0] / divtemp)
                 l[2] = int(l[2] / divtemp)
 
-        getposlist = poslist
+        self.poslist.append(poslist)
 
         return image
 
 if __name__ == "__main__":
     img_dir = "./asset/imgset/"
     image = MyCaptcha()
-    for i in range(10):
-        data = image.generate('1234')
-        image.write('1234', img_dir+'%s.png' % i)
-    # x = cv2.imread("out.png")
-    # x = cv2.resize(x, (0, 0), fx=4, fy=4)
+    # for i in range(10):
+    #     data = image.generate('1234')
+    #     image.write('1234', img_dir+'%s.png' % i)
+    # data = image.generate('1234')
+    image.write('1234', "out.png")
+    x = cv.imread("out.png")
+    x = cv.resize(x, (0, 0), fx=4, fy=4)
 
-    # for l in getposlist:
-    #     cv2.rectangle(x, (l[0]*4, l[1]*4), ((l[0]+l[2])*4, (l[1]+l[3])*4), (255, 0, 0),  thickness=False)
-    #
-    # cv2.imshow('image', x)
-    # cv2.waitKey()
+    for ls in image.poslist:
+        for l in ls:
+            cv.rectangle(x, (l[0]*4, l[1]*4), ((l[0]+l[2])*4, (l[1]+l[3])*4), (255, 0, 0),  thickness=False)
+
+    cv.imshow('image', x)
+    cv.waitKey()
 
