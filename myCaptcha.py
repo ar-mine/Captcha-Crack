@@ -4,6 +4,8 @@ import random
 from PIL import Image
 from PIL.ImageDraw import Draw
 import cv2 as cv
+import armine as am
+import numpy as np
 
 table = []
 for i in range(256):
@@ -14,13 +16,14 @@ DEFAULT_FONTS = [os.path.join(DATA_DIR, 'DroidSansMono.ttf')]
 
 
 class MyCaptcha(ImageCaptcha):
-    def __init__(self, width=160, height=60, fonts=None, font_sizes=None):
+    def __init__(self, width=160, height=60, fonts=None, font_sizes=None, normalized=False):
         self._width = width
         self._height = height
         self._fonts = fonts or DEFAULT_FONTS
         self._font_sizes = font_sizes or (42, 50, 56)
         self._truefonts = []
         self.poslist = []
+        self.normalized = normalized
 
     def create_captcha_image(self, chars, color, background):
         """Create the CAPTCHA image itself.
@@ -105,26 +108,29 @@ class MyCaptcha(ImageCaptcha):
             for l in poslist:
                 l[1] = int(l[1] / divtemp)
                 l[3] = int(l[3] / divtemp)
-
+        if self.normalized:
+            for l in poslist:
+                l[1], l[3] = l[1]/self._width, l[3]/self._width
+                l[2], l[4] = l[2]/self._height, l[4]/self._height
         self.poslist.append(poslist)
 
         return image
 
 if __name__ == "__main__":
     img_dir = "./asset/imgset/"
-    image = MyCaptcha()
+    image = MyCaptcha(width=256, height=256, normalized=True)
     # for i in range(10):
     #     data = image.generate('1234')
     #     image.write('1234', img_dir+'%s.png' % i)
     # data = image.generate('1234')
     image.write('1234', "out.png")
     x = cv.imread("out.png")
-    x = cv.resize(x, (0, 0), fx=4, fy=4)
 
-    for ls in image.poslist:
+    poslist = np.array(image.poslist)
+    for ls in poslist:
         for l in ls:
-            cv.rectangle(x, (l[1]*4, l[2]*4), (l[3]*4, l[4]*4), (255, 0, 0))
-
+            #cv.rectangle(x, (l[1], l[2]), (l[3], l[4]), (255, 0, 0))
+            am.cv_rectangle_normalized(x, ls[:, 1:], normallized=True)
     cv.imshow('image', x)
     cv.waitKey()
 

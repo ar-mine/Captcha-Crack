@@ -70,62 +70,23 @@ npx.set_np()
 #         data_shape=(3, edge_size, edge_size),
 #         shuffle=False)
 #     return train_iter, val_iter
-def load_data_pikachu(batch_size):
-    """Load the pikachu dataset"""
-    data_dir = './'
-    train_iter = image.ImageDetIter(
-        path_imgrec=os.path.join(data_dir, 'test.rec'),
-        path_imgidx=os.path.join(data_dir, 'test.idx'),
-        batch_size=batch_size,
-        shuffle=True,   # Read the dataset in random order
-        data_shape=(3, 160, 60)
-    )
-    return train_iter
-
-if __name__ == "__main__":
-    batch_size = 5
-    train_iter = load_data_pikachu(batch_size)
-    batch = train_iter.next()
-    print(batch.data[0].shape, batch.label[0].shape)
 
 
-    imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
-    show = am.cv_multishow(imgs, 2, 2)
-    cv.imshow('img', show)
-    cv.waitKey(0)
-    cv.destroyAllWindows()
-
-# axes = show_images(imgs, 2, 5, scale=2)
-# for ax, label in zip(axes, batch.label[0][0:10]):
-#     show_bboxes(ax, [label[0][1:5] * edge_size], colors=['w'])
-
-# plt.show()
-
-'''
 def cls_predictor(num_anchors, num_classes):
     return nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3, padding=1)
 
-
 def bbox_predictor(num_anchors):
     return nn.Conv2D(num_anchors * 4, kernel_size=3, padding=1)
-
 
 def forward(x, block):
     block.initialize()
     return block(x)
 
-
-Y1 = forward(np.zeros((2, 8, 20, 20)), cls_predictor(5, 10))
-Y2 = forward(np.zeros((2, 16, 10, 10)), cls_predictor(3, 10))
-print(Y1.shape, Y2.shape)
-
 def flatten_pred(pred):
     return npx.batch_flatten(pred.transpose(0, 2, 3, 1))
 
-
 def concat_preds(preds):
     return np.concatenate([flatten_pred(p) for p in preds], axis=1)
-
 
 def down_sample_blk(num_channels):
     blk = nn.Sequential()
@@ -136,13 +97,11 @@ def down_sample_blk(num_channels):
     blk.add(nn.MaxPool2D(2))
     return blk
 
-
 def base_net():
     blk = nn.Sequential()
     for num_filters in [16, 32, 64]:
         blk.add(down_sample_blk(num_filters))
     return blk
-
 
 def get_blk(i):
     if i == 0:
@@ -153,19 +112,12 @@ def get_blk(i):
         blk = down_sample_blk(128)
     return blk
 
-
 def blk_forward(X, blk, size, ratio, cls_predictor, bbox_predictor):
     Y = blk(X)
     anchors = npx.multibox_prior(Y, sizes=size, ratios=ratio)
     cls_preds = cls_predictor(Y)
     bbox_preds = bbox_predictor(Y)
     return (Y, anchors, cls_preds, bbox_preds)
-
-
-sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79], [0.88, 0.961]]
-ratios = [[1, 2, 0.5]] * 5
-num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-
 
 class TinySSD(nn.Block):
     def __init__(self, num_classes, **kwargs):
@@ -174,9 +126,9 @@ class TinySSD(nn.Block):
         for i in range(5):
             # The assignment statement is self.blk_i = get_blk(i)
             setattr(self, 'blk_%d' % i, get_blk(i))
-            setattr(self, 'cls_%d' % i, cls_predictor(num_anchors,
-            num_classes))
+            setattr(self, 'cls_%d' % i, cls_predictor(num_anchors, num_classes))
             setattr(self, 'bbox_%d' % i, bbox_predictor(num_anchors))
+
     def forward(self, X):
         anchors, cls_preds, bbox_preds = [None] * 5, [None] * 5, [None] * 5
         for i in range(5):
@@ -193,10 +145,96 @@ class TinySSD(nn.Block):
         bbox_preds = concat_preds(bbox_preds)
         return anchors, cls_preds, bbox_preds
 
-def try_all_gpus():
-    """Return all available GPUs, or [cpu(),] if no GPU exists."""
-    ctxes = [npx.gpu(i) for i in range(npx.num_gpus())]
-    return ctxes if ctxes else [npx.cpu()]
+def calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks):
+    cls = cls_loss(cls_preds, cls_labels)
+    bbox = bbox_loss(bbox_preds * bbox_masks, bbox_labels * bbox_masks)
+    return cls + bbox
+
+def cls_eval(cls_preds, cls_labels):
+    # Because the category prediction results are placed in the final
+    # dimension, argmax must specify this dimension
+    return float((cls_preds.argmax(axis=-1) == cls_labels).sum())
+
+def bbox_eval(bbox_preds, bbox_labels, bbox_masks):
+    return float((np.abs((bbox_labels - bbox_preds) * bbox_masks)).sum())
+
+class Accumulator(object):
+    """Sum a list of numbers over time"""
+    def __init__(self, n):
+        self.data = [0.0] * n
+    def add(self, *args):
+        self.data = [a+b for a, b in zip(self.data, args)]
+    def reset(self):
+        self.data = [0] * len(self.data)
+    def __getitem__(self, i):
+        return self.data[i]
+
+if __name__ == "__main__":
+    sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79], [0.88, 0.961]]
+    ratios = [[1, 2, 0.5]] * 5
+    num_anchors = len(sizes[0]) + len(ratios[0]) - 1
+    img_dir = "E:/Dataset/Captcha/img/"
+    save_dir = "E:/Dataset/Captcha/rec/"
+    file_prefix = "rec_256_256"
+
+    batch_size = 8
+    train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
+    ctx = am.try_all_gpus()
+    net = TinySSD(num_classes=1)
+
+    net.initialize(init=init.Xavier(), ctx=ctx)
+    trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.2, 'wd': 5e-4})
+    cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
+    bbox_loss = gluon.loss.L1Loss()
+
+    num_epochs = 10
+    for epoch in range(num_epochs):
+        # accuracy_sum, mae_sum, num_examples, num_labels
+        metric = Accumulator(4)
+        train_iter.reset()  # Read data from the start.
+        for batch in train_iter:
+            X = batch.data[0].as_in_ctx(ctx[0])
+            Y = batch.label[0].as_in_ctx(ctx[0])
+            with autograd.record():
+                # Generate multiscale anchor boxes and predict the category and
+                # offset of each
+                anchors, cls_preds, bbox_preds = net(X)
+                # Label the category and offset of each anchor box
+                bbox_labels, bbox_masks, cls_labels = npx.multibox_target(
+                    anchors, Y, cls_preds.transpose(0, 2, 1))
+                # Calculate the loss function using the predicted and labeled
+                # category and offset values
+                l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks)
+
+            l.backward()
+            trainer.step(batch_size)
+            metric.add(cls_eval(cls_preds, cls_labels), cls_labels.size,
+                       bbox_eval(bbox_preds, bbox_labels, bbox_masks),
+                       bbox_labels.size)
+        cls_err, bbox_mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
+
+
+    print('class err %.2e, bbox mae %.2e' % (cls_err, bbox_mae))
+
+
+
+    # batch = train_iter.next()
+    # # !!! Need to use data[0] to get ndarray
+    # # print(batch.data[0].shape, batch.label[0].shape)
+    #
+    #
+    # imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
+    # show = am.cv_multishow(imgs, 2, 2)
+    # cv.imshow('img', show)
+    # cv.waitKey(0)
+    # cv.destroyAllWindows()
+    #
+    # Y1 = forward(np.zeros((2, 8, 20, 20)), cls_predictor(5, 10))
+    # Y2 = forward(np.zeros((2, 16, 10, 10)), cls_predictor(3, 10))
+    # print(Y1.shape, Y2.shape)
+
+'''
+
 
 
 net = TinySSD(num_classes=1)
@@ -205,29 +243,6 @@ X = np.zeros((32, 3, 256, 256))
 anchors, cls_preds, bbox_preds = net(X)
 batch_size = 8
 train_iter, _ = load_data_pikachu(batch_size)
-
-ctx, net = try_all_gpus(), TinySSD(num_classes=1)
-net.initialize(init=init.Xavier(), ctx=ctx)
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.2, 'wd': 5e-4})
-
-cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
-bbox_loss = gluon.loss.L1Loss()
-
-
-def calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks):
-    cls = cls_loss(cls_preds, cls_labels)
-    bbox = bbox_loss(bbox_preds * bbox_masks, bbox_labels * bbox_masks)
-    return cls + bbox
-
-
-def cls_eval(cls_preds, cls_labels):
-    # Because the category prediction results are placed in the final
-    # dimension, argmax must specify this dimension
-    return float((cls_preds.argmax(axis=-1) == cls_labels).sum())
-
-
-def bbox_eval(bbox_preds, bbox_labels, bbox_masks):
-    return float((np.abs((bbox_labels - bbox_preds) * bbox_masks)).sum())
 
 
 class Timer(object):
@@ -252,50 +267,11 @@ class Timer(object):
         # Return the accumuated times
         return np.array(self.times).cumsum().tolist()
 
-class Accumulator(object):
-    """Sum a list of numbers over time"""
-    def __init__(self, n):
-        self.data = [0.0] * n
-    def add(self, *args):
-        self.data = [a+b for a, b in zip(self.data, args)]
-    def reset(self):
-        self.data = [0] * len(self.data)
-    def __getitem__(self, i):
-        return self.data[i]
 
 
 
-num_epochs, timer = 20, Timer()
-# animator = d2l.Animator(xlabel='epoch', xlim=[1, num_epochs], legend=['class error', 'bbox mae'])
-for epoch in range(num_epochs):
-    # accuracy_sum, mae_sum, num_examples, num_labels
-    metric = Accumulator(4)
-    train_iter.reset() # Read data from the start.
-    for batch in train_iter:
-        timer.start()
-        X = batch.data[0].as_in_context(ctx)
-        Y = batch.label[0].as_in_context(ctx)
-        with autograd.record():
-            # Generate multiscale anchor boxes and predict the category and
-            # offset of each
-            anchors, cls_preds, bbox_preds = net(X)
-            # Label the category and offset of each anchor box
-            bbox_labels, bbox_masks, cls_labels = npx.multibox_target(
-            anchors, Y, cls_preds.transpose(0, 2, 1))
-            # Calculate the loss function using the predicted and labeled
-            # category and offset values
-            l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks)
 
-        l.backward()
-        trainer.step(batch_size)
-        metric.add(cls_eval(cls_preds, cls_labels), cls_labels.size,
-                    bbox_eval(bbox_preds, bbox_labels, bbox_masks),
-                    bbox_labels.size)
-    cls_err, bbox_mae = 1-metric[0]/metric[1], metric[2]/metric[3]
-    # animator.add(epoch+1, (cls_err, bbox_mae))
-print('class err %.2e, bbox mae %.2e' % (cls_err, bbox_mae))
-print('%.1f exampes/sec on %s' % (train_iter.num_image/timer.stop(), ctx))
-# plt.show()
+
 
 img = image.imread('../img/pikachu.jpg')
 feature = image.imresize(img, 256, 256).astype('float32')

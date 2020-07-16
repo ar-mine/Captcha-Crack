@@ -22,8 +22,8 @@ class Im2rec:
         return ret_array
 
     def save_file(self, labels):
-        write_record = mx.recordio.MXIndexedRecordIO("%s.idx" % self.fname,
-                                                     "%s.rec" % self.fname, 'w')
+        write_record = mx.recordio.MXIndexedRecordIO(self.save_path+"%s.idx" % self.fname,
+                                                     self.save_path+"%s.rec" % self.fname, 'w')
         file_name = os.listdir(self.img_path)
         for i, file in enumerate(file_name):
             img = cv.imread(self.img_path+file)
@@ -36,8 +36,8 @@ class Im2rec:
         write_record.close()
 
     def save_data(self, datas, labels):
-        write_record = mx.recordio.MXIndexedRecordIO("%s.idx" % self.fname,
-                                                     "%s.rec" % self.fname, 'w')
+        write_record = mx.recordio.MXIndexedRecordIO(self.save_path+"%s.idx" % self.fname,
+                                                     self.save_path+"%s.rec" % self.fname, 'w')
         for i, data in enumerate(datas):
             img = data.transpose(1, 0, 2)
             label = np.array([4, 5, img.shape[0], img.shape[1], labels[i]])
@@ -47,7 +47,7 @@ class Im2rec:
             write_record.write_idx(i, s)
         write_record.close()
 
-    def read(self):
+    def read_show(self):
         read_record = mx.recordio.MXIndexedRecordIO("%s.idx" % self.fname,
                                                     "%s.rec" % self.fname, 'r')
         #遍历rec文件
@@ -57,9 +57,13 @@ class Im2rec:
             header, s = mx.recordio.unpack(item)
             #将图片的bytes数据转换为ndarray
             img = mx.image.imdecode(s).asnumpy()
-            # cv.imshow('%d'%i, img)
+            cv.imshow('%d'%i, img)
         cv.waitKey(0)
 
 
 if __name__ == "__main__":
-    pass
+    img_dir = "./asset/imgset/"
+    rec = Im2rec(img_path=img_dir, save_path="./", fname="test")
+    poslist = np.zeros((10, 5))
+    rec.save_file(poslist)
+    rec.read_show()

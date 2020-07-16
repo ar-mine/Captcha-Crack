@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
-from mxnet import npx
+import os
+from mxnet import autograd, contrib, gluon, image, init, npx
 
 npx.set_np()
 '''
@@ -16,9 +17,9 @@ anchors = np.array([[0, 0.1, 0.2, 0.3], [0.15, 0.2, 0.4, 0.4],
 
 def cv_rectangle_normalized(img, pos, normallized=False, text=None, color=(255, 0, 0), thickness=2):
     '''  Simplify the opencv function to draw rectangle  '''
-    pos = np.array(pos)
     w = img.shape[0]
     h = img.shape[1]
+    pos = np.array(pos)
     scale = np.array((h, w, h, w))
     if len(pos.shape) < 2:
         if text is None:
@@ -32,13 +33,15 @@ def cv_rectangle_normalized(img, pos, normallized=False, text=None, color=(255, 
     else:
         for i, posi in enumerate(pos):
             if normallized:
-                posi = (posi * scale).astype(np.uint8)
+                posi = (posi * scale).astype(np.int32)
+            posi = posi.tolist()
             cv.rectangle(img=img, pt1=(posi[0], posi[1]), pt2=(posi[2], posi[3]),
                          color=color, thickness=thickness)
             if text is None:
                 cv_showtxt(img, "", (posi[0], posi[1]), color)
             else:
                 cv_showtxt(img, text[i], (posi[0], posi[1]), color)
+
 
 def cv_showtxt(img, text, org, color, fontFace=cv.FONT_HERSHEY_SIMPLEX, fontScale=1, thickness=2):
     cv.putText(img=img, text=text, org=org, fontFace=fontFace,
@@ -60,6 +63,27 @@ def cv_multishow(imglist, row, column):
         mulimg[int(i/column)*max_h:int(i/column)*max_h+img.shape[0], int(i%column)*max_w:(i%column)*max_w+img.shape[1], :] = img
     return mulimg
 
+
+def cv_multibox():
+    pass
+
+
+def try_all_gpus():
+    """Return all available GPUs, or [cpu(),] if no GPU exists.
+       Copy from d2l library"""
+    ctxes = [npx.gpu(i) for i in range(npx.num_gpus())]
+    return ctxes if ctxes else [npx.cpu()]
+
+
+def load_data_test(batch_size, data_dir, fname):
+    train_iter = image.ImageDetIter(
+        path_imgrec=os.path.join(data_dir, '%s.rec' % fname),
+        path_imgidx=os.path.join(data_dir, '%s.idx' % fname),
+        batch_size=batch_size,
+        shuffle=True,   # Read the dataset in random order
+        data_shape=(3, 256, 256)
+    )
+    return train_iter
 # cv_rectangle_normalized(img, ground_truth[:, 1:], ["dog", "cat"])
 #
 # cv.imshow('img', img)
