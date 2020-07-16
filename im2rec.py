@@ -11,6 +11,16 @@ class Im2rec:
         self.save_path = save_path
         self.fname = fname
 
+    def _label_generate(self, img, label):
+        w = img.shape[0]
+        h = img.shape[1]
+        ret_array = np.zeros((4+label.size, ))
+        ret_array[0] = 4
+        ret_array[1] = label.size
+        ret_array[2], ret_array[3] = w, h
+        ret_array[4:] = label.flatten()
+        return ret_array
+
     def save_file(self, labels):
         write_record = mx.recordio.MXIndexedRecordIO("%s.idx" % self.fname,
                                                      "%s.rec" % self.fname, 'w')
@@ -18,7 +28,7 @@ class Im2rec:
         for i, file in enumerate(file_name):
             img = cv.imread(self.img_path+file)
             img = img.transpose(1, 0, 2)
-            label = np.array([4, 5, img.shape[0], img.shape[1], labels[i][0]])
+            label = self._label_generate(img, labels[i])
             header = mx.recordio.IRHeader(flag=0, label=label, id=i, id2=0)
             s = mx.recordio.pack_img(header, img, quality=95, img_fmt=".png")
             #将数据写入到rec文件中

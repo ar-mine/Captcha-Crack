@@ -87,11 +87,14 @@ class MyCaptcha(ImageCaptcha):
         rand = int(0.25 * average)
         offset = int(average * 0.1)
 
+        str_count = 0
         for i, im in enumerate(images):
             w, h = im.size
             y = int((self._height - h) / 2)
             if(flaglist[i]):
-                poslist.append([offset, y, w, h])
+                test = chars[str_count]
+                poslist.append([int(chars[str_count]), offset, y, w+offset, h+y])
+                str_count += 1
             mask = im.convert('L').point(table)
             image.paste(im, (offset, y), mask)
             offset = offset + w + random.randint(-rand, 0)
@@ -100,8 +103,8 @@ class MyCaptcha(ImageCaptcha):
             image = image.resize((self._width, self._height))
             divtemp = width / self._width
             for l in poslist:
-                l[0] = int(l[0] / divtemp)
-                l[2] = int(l[2] / divtemp)
+                l[1] = int(l[1] / divtemp)
+                l[3] = int(l[3] / divtemp)
 
         self.poslist.append(poslist)
 
@@ -120,7 +123,7 @@ if __name__ == "__main__":
 
     for ls in image.poslist:
         for l in ls:
-            cv.rectangle(x, (l[0]*4, l[1]*4), ((l[0]+l[2])*4, (l[1]+l[3])*4), (255, 0, 0),  thickness=False)
+            cv.rectangle(x, (l[1]*4, l[2]*4), (l[3]*4, l[4]*4), (255, 0, 0))
 
     cv.imshow('image', x)
     cv.waitKey()

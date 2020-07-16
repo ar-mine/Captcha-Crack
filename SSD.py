@@ -9,7 +9,6 @@ import armine as am
 
 npx.set_np()
 
-
 # def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
 #     """Plot a list of images."""
 #     figsize = (num_cols * scale, num_rows * scale)
@@ -83,17 +82,19 @@ def load_data_pikachu(batch_size):
     )
     return train_iter
 
-batch_size = 5
-train_iter = load_data_pikachu(batch_size)
-batch = train_iter.next()
-print(batch.data[0].shape, batch.label[0].shape)
+if __name__ == "__main__":
+    batch_size = 5
+    train_iter = load_data_pikachu(batch_size)
+    batch = train_iter.next()
+    print(batch.data[0].shape, batch.label[0].shape)
 
 
-imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
-show = am.cv_multishow(imgs, 2, 2)
-cv.imshow('img', show)
-cv.waitKey(0)
-cv.destroyAllWindows()
+    imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
+    show = am.cv_multishow(imgs, 2, 2)
+    cv.imshow('img', show)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
 # axes = show_images(imgs, 2, 5, scale=2)
 # for ax, label in zip(axes, batch.label[0][0:10]):
 #     show_bboxes(ax, [label[0][1:5] * edge_size], colors=['w'])
