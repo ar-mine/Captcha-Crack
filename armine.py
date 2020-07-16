@@ -25,8 +25,7 @@ def cv_rectangle_normalized(img, pos, normallized=False, text=None, color=(255, 
         if text is None:
             text = ""
         if normallized:
-            pos = (pos * scale).astype(np.uint8)
-        pos.astype(np.int32)
+            pos = (pos * scale).astype(np.int32)
         cv.rectangle(img=img, pt1=(pos[0], pos[1]), pt2=(pos[2], pos[3]),
                      color=color, thickness=thickness)
         cv_showtxt(img, text, (pos[0], pos[1]), color)

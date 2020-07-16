@@ -10,12 +10,12 @@ if __name__ == "__main__":
     # img_dir = "./asset/imgset/"
     # save_dir = "./"
     # file_prefix = "test"
-    img_dir = "E:/Dataset/Captcha/img/"
-    save_dir = "E:/Dataset/Captcha/rec/"
+    img_dir = "F:/Dataset/Captcha/img/"
+    save_dir = "F:/Dataset/Captcha/rec/"
     file_prefix = "rec_256_256"
 
-    cap = cha.MyCaptcha(width=256, height=256)
-    for i in range(1000):
+    cap = cha.MyCaptcha(width=256, height=256, normalized=True)
+    for i in range(2000):
         cap.write('1', img_dir+'%s.png' % i)
     poslist = np.array(cap.poslist)
 

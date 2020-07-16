@@ -169,15 +169,22 @@ class Accumulator(object):
     def __getitem__(self, i):
         return self.data[i]
 
+def predict(X):
+    anchors, cls_preds, bbox_preds = net(X.as_in_context(ctx[0]))
+    cls_probs = npx.softmax(cls_preds).transpose(0, 2, 1)
+    output = npx.multibox_detection(cls_probs, bbox_preds, anchors)
+    idx = [i for i, row in enumerate(output[0]) if row[0] != -1]
+    return output[0, idx]
+
 if __name__ == "__main__":
     sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79], [0.88, 0.961]]
     ratios = [[1, 2, 0.5]] * 5
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-    img_dir = "E:/Dataset/Captcha/img/"
-    save_dir = "E:/Dataset/Captcha/rec/"
+    img_dir = "F:/Dataset/Captcha/img/"
+    save_dir = "F:/Dataset/Captcha/rec/"
     file_prefix = "rec_256_256"
 
-    batch_size = 8
+    batch_size = 32
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
     net = TinySSD(num_classes=1)
@@ -187,7 +194,7 @@ if __name__ == "__main__":
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 10
+    num_epochs = 50
     for epoch in range(num_epochs):
         # accuracy_sum, mae_sum, num_examples, num_labels
         metric = Accumulator(4)
@@ -216,8 +223,17 @@ if __name__ == "__main__":
 
     print('class err %.2e, bbox mae %.2e' % (cls_err, bbox_mae))
 
-
-
+    # img = cv.imread('./0.png')
+    # feature = img.astype('float32')
+    img = image.imread('./0.png')
+    feature = image.imresize(img, 256, 256).astype('float32')
+    X = np.expand_dims(feature.transpose(2, 0, 1), axis=0)
+    output = predict(X)
+    img = img.asnumpy()
+    am.cv_rectangle_normalized(img=img, pos=output[0][2:], normallized=True)
+    cv.imshow('show', img)
+    cv.waitKey(0)
+    print(output)
     # batch = train_iter.next()
     # # !!! Need to use data[0] to get ndarray
     # # print(batch.data[0].shape, batch.label[0].shape)
@@ -273,16 +289,9 @@ class Timer(object):
 
 
 
-img = image.imread('../img/pikachu.jpg')
-feature = image.imresize(img, 256, 256).astype('float32')
-X = np.expand_dims(feature.transpose(2, 0, 1), axis=0)
 
-def predict(X):
-    anchors, cls_preds, bbox_preds = net(X.as_in_context(ctx))
-    cls_probs = npx.softmax(cls_preds).transpose(0, 2, 1)
-    output = npx.multibox_detection(cls_probs, bbox_preds, anchors)
-    idx = [i for i, row in enumerate(output[0]) if row[0] != -1]
-    return output[0, idx]
+
+
 
 def use_svg_display():
     """Use the svg format to display a plot in Jupyter."""
@@ -304,6 +313,6 @@ def display(img, output, threshold):
         bbox = [row[2:6] * np.array((w, h, w, h), ctx=row.context)]
         show_bboxes(fig.axes, bbox, '%.2f' % score, 'w')
         display(img, output, threshold=0.3)
-output = predict(X)
+
 
 '''
