@@ -117,15 +117,15 @@ class MyCaptcha(ImageCaptcha):
         return image
 
 if __name__ == "__main__":
-    img_dir = "./asset/imgset/"
+    img_dir = "./"
     image = MyCaptcha(width=256, height=256, normalized=True)
     # for i in range(10):
     #     data = image.generate('1234')
     #     image.write('1234', img_dir+'%s.png' % i)
     # data = image.generate('1234')
-    image.write('1234', "out.png")
+    image.write('1111', "out.png")
     x = cv.imread("out.png")
-
+# 生成数据是BGR
     poslist = np.array(image.poslist)
     for ls in poslist:
         for l in ls:

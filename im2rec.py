@@ -2,7 +2,7 @@ import mxnet as mx
 import cv2 as cv
 import numpy as np
 import os
-
+from mxnet import image
 
 
 class Im2rec:
@@ -26,8 +26,7 @@ class Im2rec:
                                                      self.save_path+"%s.rec" % self.fname, 'w')
         file_name = os.listdir(self.img_path)
         for i, file in enumerate(file_name):
-            img = cv.imread(self.img_path+file)
-            img = img.transpose(1, 0, 2)
+            img = image.imread(self.img_path+file).asnumpy()
             label = self._label_generate(img, labels[i])
             header = mx.recordio.IRHeader(flag=0, label=label, id=i, id2=0)
             s = mx.recordio.pack_img(header, img, quality=95, img_fmt=".png")
@@ -38,8 +37,8 @@ class Im2rec:
     def save_data(self, datas, labels):
         write_record = mx.recordio.MXIndexedRecordIO(self.save_path+"%s.idx" % self.fname,
                                                      self.save_path+"%s.rec" % self.fname, 'w')
-        for i, data in enumerate(datas):
-            img = data.transpose(1, 0, 2)
+        for i, img in enumerate(datas):
+            # img = data.transpose(1, 0, 2)
             label = np.array([4, 5, img.shape[0], img.shape[1], labels[i]])
             header = mx.recordio.IRHeader(flag=0, label=label, id=i, id2=0)
             s = mx.recordio.pack_img(header, img, quality=95, img_fmt=".png")

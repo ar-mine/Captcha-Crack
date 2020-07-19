@@ -2,17 +2,14 @@ import cv2 as cv
 import numpy as np
 import os
 from mxnet import autograd, contrib, gluon, image, init, npx
+from IPython import display
+import matplotlib.pyplot as plt
 
 npx.set_np()
 '''
     This is a library with some functions useful to this project, some are from other open-source and some are 
     created by me. So maybe you can see some familiar code in this library.
 '''
-img = cv.imread("./asset/catdog.jpg")
-dog_bbox, cat_bbox = [60, 45, 378, 516], [400, 112, 655, 493]
-ground_truth = np.array([[0, 0.1, 0.08, 0.52, 0.92], [1, 0.55, 0.2, 0.9, 0.88]])
-anchors = np.array([[0, 0.1, 0.2, 0.3], [0.15, 0.2, 0.4, 0.4],
-                   [0.63, 0.05, 0.88, 0.98], [0.66, 0.45, 0.8, 0.8], [0.57, 0.3, 0.92, 0.9]])
 
 
 def cv_rectangle_normalized(img, pos, normallized=False, text=None, color=(255, 0, 0), thickness=2):
@@ -83,13 +80,47 @@ def load_data_test(batch_size, data_dir, fname):
         data_shape=(3, 256, 256)
     )
     return train_iter
-# cv_rectangle_normalized(img, ground_truth[:, 1:], ["dog", "cat"])
-#
-# cv.imshow('img', img)
-# cv.waitKey(0)
-# cv.destroyAllWindows()
 
-# labels = npx.multibox_target(np.expand_dims(anchors, axis=0),
-#                             np.expand_dims(ground_truth, axis=0),
-#                             np.zeros((1, 3, 5)))
 
+# class Animator(object):
+#     def __init__(self, xlabel=None, ylabel=None, legend=[], xlim=None,
+#                  ylim=None, xscale='linear', yscale='linear', fmts=None,
+#                  nrows=1, ncols=1, figsize=(3.5, 2.5)):
+#         """Incrementally plot multiple lines."""
+#         d2l.use_svg_display()
+#         self.fig, self.axes = d2l.plt.subplots(nrows, ncols, figsize=figsize)
+#         if nrows * ncols == 1:
+#         self.axes = [self.axes, ]
+#         # Use a lambda to capture arguments
+#         self.config_axes = lambda: d2l.set_axes(
+#         self.axes[0], xlabel, ylabel, xlim, ylim, xscale, yscale, legend)
+#         self.X, self.Y, self.fmts = None, None, fmts
+#     def add(self, x, y):
+#         """Add multiple data points into the figure."""
+#         if not hasattr(y, "__len__"):
+#             y = [y]
+#         n = len(y)
+#         if not hasattr(x, "__len__"):
+#         x = [x] * n
+#         if not self.X:
+#         self.X = [[] for _ in range(n)]
+#         if not self.Y:
+#         self.Y = [[] for _ in range(n)]
+#         if not self.fmts:
+#         self.fmts = ['-'] * n
+#         for i, (a, b) in enumerate(zip(x, y)):
+#         if a is not None and b is not None:
+#         self.X[i].append(a)
+#         self.Y[i].append(b)
+#         self.axes[0].cla()
+#         for x, y, fmt in zip(self.X, self.Y, self.fmts):
+#         self.axes[0].plot(x, y, fmt)
+#         self.config_axes()
+#         display.display(self.fig)
+#         display.clear_output(wait=True)
+
+if __name__ == "__main__":
+    img = image.imread("./asset/catdog.jpg")
+    img = img.asnumpy()
+    cv.imshow("test", img)
+    cv.waitKey(0)

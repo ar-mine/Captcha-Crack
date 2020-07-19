@@ -7,7 +7,7 @@ import time
 import cv2 as cv
 import armine as am
 
-npx.set_np()
+
 
 # def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
 #     """Plot a list of images."""
@@ -77,10 +77,6 @@ def cls_predictor(num_anchors, num_classes):
 
 def bbox_predictor(num_anchors):
     return nn.Conv2D(num_anchors * 4, kernel_size=3, padding=1)
-
-def forward(x, block):
-    block.initialize()
-    return block(x)
 
 def flatten_pred(pred):
     return npx.batch_flatten(pred.transpose(0, 2, 3, 1))
@@ -177,12 +173,18 @@ def predict(X):
     return output[0, idx]
 
 if __name__ == "__main__":
+    npx.set_np()
+    # Anchor box的大小
     sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79], [0.88, 0.961]]
     ratios = [[1, 2, 0.5]] * 5
+
+    # n + m - 1，只对包含s1或者r1的感兴趣
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
     img_dir = "F:/Dataset/Captcha/img/"
     save_dir = "F:/Dataset/Captcha/rec/"
     file_prefix = "rec_256_256"
+    # save_dir = "./asset/dataset/"
+    # file_prefix = "train"
 
     batch_size = 32
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
@@ -190,27 +192,24 @@ if __name__ == "__main__":
     net = TinySSD(num_classes=1)
 
     net.initialize(init=init.Xavier(), ctx=ctx)
-    trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.2, 'wd': 5e-4})
+    trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.08, 'wd': 5e-4})
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 50
+    num_epochs = 20
     for epoch in range(num_epochs):
+        train_iter.reset()  # Read data from the start.
         # accuracy_sum, mae_sum, num_examples, num_labels
         metric = Accumulator(4)
-        train_iter.reset()  # Read data from the start.
         for batch in train_iter:
             X = batch.data[0].as_in_ctx(ctx[0])
             Y = batch.label[0].as_in_ctx(ctx[0])
             with autograd.record():
-                # Generate multiscale anchor boxes and predict the category and
-                # offset of each
+                # Generate multiscale anchor boxes and predict the category and offset of each
                 anchors, cls_preds, bbox_preds = net(X)
                 # Label the category and offset of each anchor box
-                bbox_labels, bbox_masks, cls_labels = npx.multibox_target(
-                    anchors, Y, cls_preds.transpose(0, 2, 1))
-                # Calculate the loss function using the predicted and labeled
-                # category and offset values
+                bbox_labels, bbox_masks, cls_labels = npx.multibox_target(anchors, Y, cls_preds.transpose(0, 2, 1))
+                # Calculate the loss function using the predicted and labeled category and offset values
                 l = calc_loss(cls_preds, cls_labels, bbox_preds, bbox_labels, bbox_masks)
 
             l.backward()
@@ -218,22 +217,29 @@ if __name__ == "__main__":
             metric.add(cls_eval(cls_preds, cls_labels), cls_labels.size,
                        bbox_eval(bbox_preds, bbox_labels, bbox_masks),
                        bbox_labels.size)
-        cls_err, bbox_mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
+        # print("Epoch %d, cls_eval=%f, cls_labels_size=%d, bbox_eval=%f, bbox_labels_size=%d" %
+        #       (epoch, metric[0], metric[1], metric[2], metric[3]))
 
+        cls_err, bbox_mae = 1 - metric[0] / metric[1], metric[2] / metric[3]
+        print("Epoch %d, cls_err=%f, bbox_mae=%f" %
+              (epoch, cls_err, bbox_mae))
 
     print('class err %.2e, bbox mae %.2e' % (cls_err, bbox_mae))
 
     # img = cv.imread('./0.png')
     # feature = img.astype('float32')
-    img = image.imread('./0.png')
-    feature = image.imresize(img, 256, 256).astype('float32')
+    img = image.imread('./out.png')
+    feature = img.astype('float32')
     X = np.expand_dims(feature.transpose(2, 0, 1), axis=0)
     output = predict(X)
-    img = img.asnumpy()
-    am.cv_rectangle_normalized(img=img, pos=output[0][2:], normallized=True)
-    cv.imshow('show', img)
-    cv.waitKey(0)
-    print(output)
+    for out in output:
+        imgs = cv.imread('./out.png')
+        am.cv_rectangle_normalized(img=imgs, pos=out[2:], normallized=True)
+        cv.imshow('show', imgs)
+        o = (out[2:]*256).astype(np.int32)
+        print(out[1], o)
+        cv.waitKey(0)
+
     # batch = train_iter.next()
     # # !!! Need to use data[0] to get ndarray
     # # print(batch.data[0].shape, batch.label[0].shape)
