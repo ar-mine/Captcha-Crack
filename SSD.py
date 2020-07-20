@@ -179,20 +179,16 @@ if __name__ == "__main__":
 
     # n + m - 1，只对包含s1或者r1的感兴趣
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-    img_dir = "E:/Dataset/Captcha/img/"
-    save_dir = "E:/Dataset/Captcha/rec/"
+    img_dir = "F:/Dataset/Captcha/img/"
+    save_dir = "F:/Dataset/Captcha/rec/"
     file_prefix = "rec_200_100"
     # save_dir = "./asset/dataset/"
     # file_prefix = "train"
 
-    batch_size = 16
+    batch_size = 32
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
     net = TinySSD(num_classes=49)
-
-    batch = train_iter.next()
-    img = batch.data[0][0].transpose((1, 2, 0)).asnumpy().astype(np.uint8)
-    cv.imshow('test', img)
 
 
     net.initialize(init=init.Xavier(), ctx=ctx)
@@ -200,14 +196,15 @@ if __name__ == "__main__":
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 10
+    num_epochs = 25
     for epoch in range(num_epochs):
         train_iter.reset()  # Read data from the start.
         # accuracy_sum, mae_sum, num_examples, num_labels
         metric = Accumulator(4)
         for batch in train_iter:
             X = batch.data[0].as_in_ctx(ctx[0])
-            Y = batch.label[0].as_in_ctx(ctx[0])
+            Y_ = batch.label[0]
+            Y = Y_.reshape((Y_.shape[0], 4, int(Y_.shape[2]/4))).as_in_ctx(ctx[0])
             with autograd.record():
                 # Generate multiscale anchor boxes and predict the category and offset of each
                 anchors, cls_preds, bbox_preds = net(X)
