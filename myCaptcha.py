@@ -123,7 +123,7 @@ if __name__ == "__main__":
     #     data = image.generate('1234')
     #     image.write('1234', img_dir+'%s.png' % i)
     # data = image.generate('1234')
-    image.write('1111', "out.png")
+    image.write('1258', "out.png")
     x = cv.imread("out.png")
 # 生成数据是BGR
     poslist = np.array(image.poslist)

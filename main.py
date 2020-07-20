@@ -10,13 +10,14 @@ if __name__ == "__main__":
     # img_dir = "./asset/imgset/"
     # save_dir = "./"
     # file_prefix = "test"
-    img_dir = "F:/Dataset/Captcha/img/"
-    save_dir = "F:/Dataset/Captcha/rec/"
+    img_dir = "E:/Dataset/Captcha/img/"
+    save_dir = "E:/Dataset/Captcha/rec/"
     file_prefix = "rec_256_256"
 
     cap = cha.MyCaptcha(width=256, height=256, normalized=True)
-    for i in range(2000):
-        cap.write('1', img_dir+'%s.png' % i)
+    for i in range(10):
+        for j in range(500):
+            cap.write(str(i), img_dir+'%d.png' % (i*500+j))
     poslist = np.array(cap.poslist)
 
     '''******************************  Step-2 Compress images set to RecordIO file  ***********************'''

@@ -8,7 +8,6 @@ import cv2 as cv
 import armine as am
 
 
-
 # def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
 #     """Plot a list of images."""
 #     figsize = (num_cols * scale, num_rows * scale)
@@ -180,23 +179,23 @@ if __name__ == "__main__":
 
     # n + m - 1，只对包含s1或者r1的感兴趣
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-    img_dir = "F:/Dataset/Captcha/img/"
-    save_dir = "F:/Dataset/Captcha/rec/"
+    img_dir = "E:/Dataset/Captcha/img/"
+    save_dir = "E:/Dataset/Captcha/rec/"
     file_prefix = "rec_256_256"
     # save_dir = "./asset/dataset/"
     # file_prefix = "train"
 
-    batch_size = 32
+    batch_size = 16
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
-    net = TinySSD(num_classes=1)
+    net = TinySSD(num_classes=10)
 
     net.initialize(init=init.Xavier(), ctx=ctx)
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.08, 'wd': 5e-4})
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 20
+    num_epochs = 10
     for epoch in range(num_epochs):
         train_iter.reset()  # Read data from the start.
         # accuracy_sum, mae_sum, num_examples, num_labels
@@ -237,7 +236,7 @@ if __name__ == "__main__":
         am.cv_rectangle_normalized(img=imgs, pos=out[2:], normallized=True)
         cv.imshow('show', imgs)
         o = (out[2:]*256).astype(np.int32)
-        print(out[1], o)
+        print(out[0:2], o)
         cv.waitKey(0)
 
     # batch = train_iter.next()
