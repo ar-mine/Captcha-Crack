@@ -181,14 +181,19 @@ if __name__ == "__main__":
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
     img_dir = "E:/Dataset/Captcha/img/"
     save_dir = "E:/Dataset/Captcha/rec/"
-    file_prefix = "rec_256_256"
+    file_prefix = "rec_200_100"
     # save_dir = "./asset/dataset/"
     # file_prefix = "train"
 
     batch_size = 16
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
-    net = TinySSD(num_classes=10)
+    net = TinySSD(num_classes=49)
+
+    batch = train_iter.next()
+    img = batch.data[0][0].transpose((1, 2, 0)).asnumpy().astype(np.uint8)
+    cv.imshow('test', img)
+
 
     net.initialize(init=init.Xavier(), ctx=ctx)
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.08, 'wd': 5e-4})
@@ -236,86 +241,3 @@ if __name__ == "__main__":
         o = (out[2:]*256).astype(np.int32)
         print(out[0:2], o)
         cv.waitKey(0)
-
-    # batch = train_iter.next()
-    # # !!! Need to use data[0] to get ndarray
-    # # print(batch.data[0].shape, batch.label[0].shape)
-    #
-    #
-    # imgs = (batch.data[0][0:4].transpose(0, 3, 2, 1))
-    # show = am.cv_multishow(imgs, 2, 2)
-    # cv.imshow('img', show)
-    # cv.waitKey(0)
-    # cv.destroyAllWindows()
-    #
-    # Y1 = forward(np.zeros((2, 8, 20, 20)), cls_predictor(5, 10))
-    # Y2 = forward(np.zeros((2, 16, 10, 10)), cls_predictor(3, 10))
-    # print(Y1.shape, Y2.shape)
-
-'''
-
-
-
-net = TinySSD(num_classes=1)
-net.initialize()
-X = np.zeros((32, 3, 256, 256))
-anchors, cls_preds, bbox_preds = net(X)
-batch_size = 8
-train_iter, _ = load_data_pikachu(batch_size)
-
-
-class Timer(object):
-    """Record multiple running times."""
-    def __init__(self):
-        self.times = []
-        self.start()
-    def start(self):
-        # Start the timer
-        self.start_time = time.time()
-    def stop(self):
-        # Stop the timer and record the time in a list
-        self.times.append(time.time() - self.start_time)
-        return self.times[-1]
-    def avg(self):
-        # Return the average time
-        return sum(self.times)/len(self.times)
-    def sum(self):
-        # Return the sum of time
-        return sum(self.times)
-    def cumsum(self):
-        # Return the accumuated times
-        return np.array(self.times).cumsum().tolist()
-
-
-
-
-
-
-
-
-
-
-
-def use_svg_display():
-    """Use the svg format to display a plot in Jupyter."""
-    display.set_matplotlib_formats('svg')
-
-def set_figsize(figsize=(3.5, 2.5)):
-    """Set the figure size for matplotlib."""
-    use_svg_display()
-    plt.rcParams['figure.figsize'] = figsize
-
-def display(img, output, threshold):
-    set_figsize((5, 5))
-    fig = plt.imshow(img.asnumpy())
-    for row in output:
-        score = float(row[1])
-        if score < threshold:
-            continue
-        h, w = img.shape[0:2]
-        bbox = [row[2:6] * np.array((w, h, w, h), ctx=row.context)]
-        show_bboxes(fig.axes, bbox, '%.2f' % score, 'w')
-        display(img, output, threshold=0.3)
-
-
-'''
