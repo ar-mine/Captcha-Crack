@@ -52,24 +52,23 @@ import armine as am
 #                         bbox=dict(facecolor=color, lw=0))
 
 
-# def load_data_pikachu(batch_size, edge_size=256):
-#     """Load the pikachu dataset"""
-#     data_dir = './asset/dataset'
-#     train_iter = image.ImageDetIter(
-#         path_imgrec=os.path.join(data_dir, 'train.rec'),
-#         path_imgidx=os.path.join(data_dir, 'train.idx'),
-#         batch_size=batch_size,
-#         data_shape=(3, edge_size, edge_size),  # The shape of the output image
-#         shuffle=True,   # Read the dataset in random order
-#         rand_crop=1,    # The probability of random cropping is 1
-#         min_object_covered=0.95, max_attempts=200)
-#     val_iter = image.ImageDetIter(
-#         path_imgrec=os.path.join(data_dir, 'val.rec'),
-#         batch_size=batch_size,
-#         data_shape=(3, edge_size, edge_size),
-#         shuffle=False)
-#     return train_iter, val_iter
-
+def load_data_pikachu(batch_size, edge_size=256):
+    """Load the pikachu dataset"""
+    data_dir = './asset/dataset'
+    train_iter = image.ImageDetIter(
+        path_imgrec=os.path.join(data_dir, 'train.rec'),
+        path_imgidx=os.path.join(data_dir, 'train.idx'),
+        batch_size=batch_size,
+        data_shape=(3, edge_size, edge_size),  # The shape of the output image
+        shuffle=True,   # Read the dataset in random order
+        rand_crop=1,    # The probability of random cropping is 1
+        min_object_covered=0.95, max_attempts=200)
+    val_iter = image.ImageDetIter(
+        path_imgrec=os.path.join(data_dir, 'val.rec'),
+        batch_size=batch_size,
+        data_shape=(3, edge_size, edge_size),
+        shuffle=False)
+    return train_iter, val_iter
 
 def cls_predictor(num_anchors, num_classes):
     return nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3, padding=1)
@@ -173,6 +172,7 @@ def predict(X):
 
 if __name__ == "__main__":
     npx.set_np()
+
     # Anchor box的大小
     sizes = [[0.2, 0.272], [0.37, 0.447], [0.54, 0.619], [0.71, 0.79], [0.88, 0.961]]
     ratios = [[1, 2, 0.5]] * 5
@@ -225,8 +225,6 @@ if __name__ == "__main__":
 
     print('class err %.2e, bbox mae %.2e' % (cls_err, bbox_mae))
 
-    # img = cv.imread('./0.png')
-    # feature = img.astype('float32')
     img = image.imread('./out.png')
     feature = img.astype('float32')
     X = np.expand_dims(feature.transpose(2, 0, 1), axis=0)
