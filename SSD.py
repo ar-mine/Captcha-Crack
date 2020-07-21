@@ -179,16 +179,16 @@ if __name__ == "__main__":
 
     # n + m - 1，只对包含s1或者r1的感兴趣
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-    img_dir = "F:/Dataset/Captcha/img/"
-    save_dir = "F:/Dataset/Captcha/rec/"
+    img_dir = "E:/Dataset/Captcha/img/"
+    save_dir = "E:/Dataset/Captcha/rec/"
     file_prefix = "rec_200_100"
     # save_dir = "./asset/dataset/"
     # file_prefix = "train"
 
-    batch_size = 32
+    batch_size = 16
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
-    net = TinySSD(num_classes=49)
+    net = TinySSD(num_classes=3)
 
 
     net.initialize(init=init.Xavier(), ctx=ctx)
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 25
+    num_epochs = 10
     for epoch in range(num_epochs):
         train_iter.reset()  # Read data from the start.
         # accuracy_sum, mae_sum, num_examples, num_labels

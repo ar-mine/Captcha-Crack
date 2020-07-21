@@ -2,6 +2,7 @@ import myCaptcha as cha
 import im2rec as i2r
 import numpy as np
 import random
+import os
 import SSD as ssd
 import armine as am
 import cv2 as cv
@@ -11,18 +12,21 @@ if __name__ == "__main__":
     # # img_dir = "./asset/imgset/"
     # # save_dir = "./"
     # # file_prefix = "test"
-    img_dir = "F:/Dataset/Captcha/img/"
-    save_dir = "F:/Dataset/Captcha/rec/"
+    img_dir = "E:/Dataset/Captcha/img/"
+    save_dir = "E:/Dataset/Captcha/rec/"
     file_prefix = "rec_200_100"
 
-    cap = cha.MyCaptcha(width=200, height=100, normalized=True)
+    cap = cha.MyCaptcha(width=256, height=256, normalized=True)
     # 四字符
     for i in range(25000):
         word = ""
         for j in range(4):
-            word += cap.dictset[random.randint(0, 48)]
+            word += cap.dictset[random.randint(0, 2)]
         cap.write(word, img_dir+'%d.png' % (i))
+        imgs = cv.imread(img_dir+'%d.png' % (i), cv.IMREAD_GRAYSCALE)
+        cv.imwrite(img_dir+'%d.png' % (i), imgs)
     poslist = np.array(cap.poslist)
+
 
     '''******************************  Step-2 Compress images set to RecordIO file  ***********************'''
     rec = i2r.Im2rec(img_path=img_dir, save_path=save_dir, fname=file_prefix)

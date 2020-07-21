@@ -12,7 +12,7 @@ for i in range(256):
     table.append(i * 1.97)
 
 DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'asset', 'font')
-DEFAULT_FONTS = [os.path.join(DATA_DIR, 'DroidSansMono.ttf')]
+DEFAULT_FONTS = [os.path.join(DATA_DIR, 'simhei.ttf')]
 
 
 class MyCaptcha(ImageCaptcha):
@@ -125,14 +125,17 @@ class MyCaptcha(ImageCaptcha):
 
 if __name__ == "__main__":
     img_dir = "./"
-    image = MyCaptcha(width=200, height=100, normalized=True)
-    image.write('a3D9', "out.png")
+    image = MyCaptcha(width=256, height=256, normalized=True)
+    image.write('2102', "out.png")
     x = cv.imread("out.png")
+    x = cv.cvtColor(x, cv.COLOR_RGB2GRAY)
+    cv.imwrite('out.png', x)
     poslist = np.array(image.poslist)
     for ls in poslist:
         for l in ls:
             am.cv_rectangle_normalized(x, ls[:, 1:], normallized=True)
     print(poslist)
-    cv.imshow('image', x)
+    cv.imshow('out.png', x)
+
     cv.waitKey()
 

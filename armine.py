@@ -77,7 +77,7 @@ def load_data_test(batch_size, data_dir, fname):
         path_imgidx=os.path.join(data_dir, '%s.idx' % fname),
         batch_size=batch_size,
         shuffle=True,   # Read the dataset in random order
-        data_shape=(3, 100, 200)
+        data_shape=(3, 256, 256)
     )
     return train_iter
 
