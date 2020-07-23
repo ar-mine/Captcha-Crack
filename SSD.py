@@ -6,50 +6,7 @@ import matplotlib.pyplot as plt
 import time
 import cv2 as cv
 import armine as am
-
-
-# def show_images(imgs, num_rows, num_cols, titles=None, scale=1.5):
-#     """Plot a list of images."""
-#     figsize = (num_cols * scale, num_rows * scale)
-#     _, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
-#     axes = axes.flatten()
-#     for i, (ax, img) in enumerate(zip(axes, imgs)):
-#         ax.imshow(img.asnumpy())
-#         ax.axes.get_xaxis().set_visible(False)
-#         ax.axes.get_yaxis().set_visible(False)
-#         if titles:
-#             ax.set_title(titles[i])
-#     return axes
-#
-#
-# def bbox_to_rect(bbox, color):
-#     """Convert bounding box to matplotlib format."""
-#     # Convert the bounding box (top-left x, top-left y, bottom-right x,
-#     # bottom-right y) format to matplotlib format: ((upper-left x,
-#     # upper-left y), width, height)
-#     return plt.Rectangle(xy=(bbox[0], bbox[1]), width=bbox[2]-bbox[0], height=bbox[3]-bbox[1],
-#                         fill=False, edgecolor=color, linewidth=2)
-#
-#
-# def show_bboxes(axes, bboxes, labels=None, colors=None):
-#     """Show bounding boxes."""
-#     def _make_list(obj, default_values=None):
-#         if obj is None:
-#             obj = default_values
-#         elif not isinstance(obj, (list, tuple)):
-#             obj = [obj]
-#         return obj
-#     labels = _make_list(labels)
-#     colors = _make_list(colors, ['b', 'g', 'r', 'm', 'c'])
-#     for i, bbox in enumerate(bboxes):
-#         color = colors[i % len(colors)]
-#         rect = bbox_to_rect(bbox.asnumpy(), color)
-#         axes.add_patch(rect)
-#         if labels and len(labels) > i:
-#             text_color = 'k' if color == 'w' else 'w'
-#             axes.text(rect.xy[0], rect.xy[1], labels[i],
-#                         va='center', ha='center', fontsize=9, color=text_color,
-#                         bbox=dict(facecolor=color, lw=0))
+import config
 
 
 def load_data_pikachu(batch_size, edge_size=256):
@@ -179,16 +136,16 @@ if __name__ == "__main__":
 
     # n + m - 1，只对包含s1或者r1的感兴趣
     num_anchors = len(sizes[0]) + len(ratios[0]) - 1
-    img_dir = "E:/Dataset/Captcha/img/"
-    save_dir = "E:/Dataset/Captcha/rec/"
-    file_prefix = "rec_200_100"
+    img_dir = config.img_dir
+    save_dir = config.save_dir
+    file_prefix = config.file_prefix
     # save_dir = "./asset/dataset/"
     # file_prefix = "train"
 
-    batch_size = 16
+    batch_size = config.batch_size
     train_iter = am.load_data_test(batch_size, save_dir, file_prefix)
     ctx = am.try_all_gpus()
-    net = TinySSD(num_classes=3)
+    net = TinySSD(num_classes=config.num_classes)
 
 
     net.initialize(init=init.Xavier(), ctx=ctx)
@@ -196,7 +153,7 @@ if __name__ == "__main__":
     cls_loss = gluon.loss.SoftmaxCrossEntropyLoss()
     bbox_loss = gluon.loss.L1Loss()
 
-    num_epochs = 10
+    num_epochs = config.num_epochs
     for epoch in range(num_epochs):
         train_iter.reset()  # Read data from the start.
         # accuracy_sum, mae_sum, num_examples, num_labels

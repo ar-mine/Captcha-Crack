@@ -6,6 +6,7 @@ from PIL.ImageDraw import Draw
 import cv2 as cv
 import armine as am
 import numpy as np
+import config
 
 table = []
 for i in range(256):
@@ -125,11 +126,9 @@ class MyCaptcha(ImageCaptcha):
 
 if __name__ == "__main__":
     img_dir = "./"
-    image = MyCaptcha(width=256, height=256, normalized=True)
+    image = MyCaptcha(width=config.img_w, height=config.img_h, normalized=True)
     image.write('2102', "out.png")
     x = cv.imread("out.png")
-    x = cv.cvtColor(x, cv.COLOR_RGB2GRAY)
-    cv.imwrite('out.png', x)
     poslist = np.array(image.poslist)
     for ls in poslist:
         for l in ls:

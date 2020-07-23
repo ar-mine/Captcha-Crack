@@ -6,25 +6,25 @@ import os
 import SSD as ssd
 import armine as am
 import cv2 as cv
+import config
 
 if __name__ == "__main__":
     # '''******************************  Step-1 Generate images and labels  *********************************'''
     # # img_dir = "./asset/imgset/"
     # # save_dir = "./"
     # # file_prefix = "test"
-    img_dir = "E:/Dataset/Captcha/img/"
-    save_dir = "E:/Dataset/Captcha/rec/"
-    file_prefix = "rec_200_100"
+    img_dir = config.img_dir
+    save_dir = config.save_dir
+    file_prefix = config.file_prefix
 
-    cap = cha.MyCaptcha(width=256, height=256, normalized=True)
+    cap = cha.MyCaptcha(width=config.img_w, height=config.img_h, normalized=True)
     # 四字符
     for i in range(25000):
         word = ""
         for j in range(4):
-            word += cap.dictset[random.randint(0, 2)]
+            word += cap.dictset[random.randint(0, config.num_classes)]
         cap.write(word, img_dir+'%d.png' % (i))
-        imgs = cv.imread(img_dir+'%d.png' % (i), cv.IMREAD_GRAYSCALE)
-        cv.imwrite(img_dir+'%d.png' % (i), imgs)
+
     poslist = np.array(cap.poslist)
 
 

@@ -4,6 +4,7 @@ import os
 from mxnet import autograd, contrib, gluon, image, init, npx
 from IPython import display
 import matplotlib.pyplot as plt
+import config
 
 npx.set_np()
 '''
@@ -77,7 +78,7 @@ def load_data_test(batch_size, data_dir, fname):
         path_imgidx=os.path.join(data_dir, '%s.idx' % fname),
         batch_size=batch_size,
         shuffle=True,   # Read the dataset in random order
-        data_shape=(3, 256, 256)
+        data_shape=(config.channel, config.img_h, config.img_w)
     )
     return train_iter
 
