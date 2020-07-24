@@ -1,12 +1,7 @@
-import myCaptcha as cha
-import im2rec as i2r
+from SSD import im2rec as i2r, myCaptcha as cha
 import numpy as np
 import random
-import os
-import SSD as ssd
-import armine as am
-import cv2 as cv
-import config
+from . import config
 
 if __name__ == "__main__":
     # '''******************************  Step-1 Generate images and labels  *********************************'''
@@ -25,12 +20,12 @@ if __name__ == "__main__":
             word += cap.dictset[random.randint(0, config.num_classes)]
         cap.write(word, img_dir+'%d.png' % (i))
 
-    poslist = np.array(cap.poslist)
+    # poslist = np.array(cap.poslist)
 
 
     '''******************************  Step-2 Compress images set to RecordIO file  ***********************'''
-    rec = i2r.Im2rec(img_path=img_dir, save_path=save_dir, fname=file_prefix)
-    rec.save_file(poslist)
+    # rec = i2r.Im2rec(img_path=img_dir, save_path=save_dir, fname=file_prefix)
+    # rec.save_file(poslist)
 
     '''*******************************  Step-3 Load the RecordIO file  ************************************'''
 
