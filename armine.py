@@ -1,4 +1,4 @@
-from mxnet import autograd, gluon, init, npx, image
+from mxnet import autograd, gluon, init, npx, image, np
 from mxnet.gluon import nn, data
 from mxnet.gluon.data import dataset
 import pandas as pd
@@ -22,7 +22,7 @@ g_re_crop = gluon.data.vision.transforms.RandomResizedCrop(32, scale=(0.64, 1.0)
 g_flip_rl = gluon.data.vision.transforms.RandomFlipLeftRight()
 g_totensor = gluon.data.vision.transforms.ToTensor()
 # Normalize each channel of the image
-g_normalize = gluon.data.vision.transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+g_normalize = gluon.data.vision.transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010])
 
 
 def read_label_file(data_dir, label_file, train_dir, valid_ratio):
@@ -204,3 +204,18 @@ class CapDataset(dataset.Dataset):
     def __len__(self):
         return len(self.items)
 
+
+def encoder(en_in, n, c_len, ctx):
+    en_out = np.zeros((en_in.shape[0], c_len * n), ctx=ctx)
+    div_arr = []
+    for k in range(c_len-1, -1, -1):
+        div_arr.append(10**k)
+    for i, src in enumerate(en_in):
+        for j, d in enumerate(div_arr):
+            ss = (src/d).astype(np.int32)
+            src -= ss*d
+            en_out[i, j*n+ss] = 1
+    return en_out
+
+def decoder(en_in, n, c_len, ctx):
+    pass
