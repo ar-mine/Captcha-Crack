@@ -48,7 +48,7 @@ train_iter = data.DataLoader(train_set.transform_first(transform_test), BATCH_SI
 
 cnn = net.CNN(NUM_CLASSES)
 loss = gluon.loss.L2Loss()
-ctx, num_epochs, lr, wd = am.try_gpu(), 1, 0.1, 5e-4
+ctx, num_epochs, lr, wd = am.try_gpu(), 1, 0.001, 5e-4
 lr_period, lr_decay, net = 80, 0.1, cnn.get_net()
 net.initialize(ctx=ctx, init=init.Xavier())
 trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': lr, 'momentum': 0.9, 'wd': wd})
