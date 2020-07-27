@@ -205,8 +205,8 @@ class CapDataset(dataset.Dataset):
         return len(self.items)
 
 
-def encoder(en_in, num_classes, c_len, ctx):
-    vector = np.zeros((en_in.shape[0], c_len * num_classes), ctx=ctx)
+def encoder(en_in, n, c_len, ctx):
+    en_out = np.zeros((en_in.shape[0], c_len * n), ctx=ctx)
     div_arr = []
     for k in range(c_len-1, -1, -1):
         div_arr.append(10**k)
@@ -214,21 +214,8 @@ def encoder(en_in, num_classes, c_len, ctx):
         for j, d in enumerate(div_arr):
             ss = (src/d).astype(np.int32)
             src -= ss*d
-            vector[i, j*num_classes+ss] = 1
-    return vector
+            en_out[i, j*n+ss] = 1
+    return en_out
 
-def decode_loss(y, y_hat, num_classes, c_len, loss):
-    y = y.reshape((y.shape[0], c_len, 10))
-    y = y.argmax(axis=2)
-    y_hat = y_hat.reshape((y_hat.shape[0], c_len, num_classes))
-    l = loss(y_hat, y).sum()
-    return l
-
-if __name__ == '__main__':
-    y_hat = np.random.rand(8, 40)
-    y = np.random.rand(8, 40)
-    print(y_hat)
-    print(y)
-    loss = gluon.loss.SoftmaxCrossEntropyLoss()
-    l = decode_loss(y, y_hat, 10, 4, loss)
-    print(l)
+def decoder(en_in, n, c_len, ctx):
+    pass
