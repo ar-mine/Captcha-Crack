@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b41cba30-7e5b-40b4-aa3f-12e0b8ad3629" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Resnet/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resnet/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/armine.py" beforeDir="false" afterPath="$PROJECT_DIR$/armine.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Resnet/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="725">
+              <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/armine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="221" column="23" selection-start-line="221" selection-start-column="23" selection-end-line="221" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+                <element signature="e#198#226#1" />
+                <element signature="e#348#419#0" />
+                <element signature="e#1010#1563#0" />
+                <element signature="e#1075#1277#0" />
+                <element signature="e#1599#1703#0" />
+                <element signature="e#1794#2758#0" />
+                <element signature="e#1888#2758#0" />
+                <element signature="e#2262#2528#0" />
+                <element signature="e#2555#2758#0" />
+                <element signature="e#2811#3077#0" />
+                <element signature="e#2947#3077#0" />
+                <element signature="e#3174#3396#0" />
+                <element signature="e#3434#4139#0" />
+                <element signature="e#3516#3932#0" />
+                <element signature="e#3978#4139#0" />
+                <element signature="e#4172#4903#0" />
+                <element signature="e#4406#4677#0" />
+                <element signature="e#4485#4658#0" />
+                <element signature="e#4927#5038#0" />
+                <element signature="e#5071#5370#0" />
+                <element signature="e#5144#5165#0" />
+                <element signature="e#5200#5250#0" />
+                <element signature="e#5280#5312#0" />
+                <element signature="e#5351#5370#0" />
+                <element signature="e#5400#5579#0" />
+                <element signature="e#5638#5998#0" />
+                <element signature="e#5870#5967#0" />
+                <element signature="e#6975#7172#0" />
+                <element signature="e#7102#7170#0" />
+                <element signature="e#7199#7319#0" />
+                <element signature="e#7414#7532#0" />
+                <element signature="e#7632#7810#0" />
+                <element signature="e#8239#8437#0" />
+                <element signature="e#8470#8492#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/context.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="196" selection-start-line="196" selection-end-line="196" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/loss.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="374" selection-start-line="374" selection-end-line="374" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Resnet/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>record</find>
+      <find>num_anchors</find>
+      <find>multibox_target</find>
+      <find>SoftmaxCrossEntropyLoss</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/im2rec.py" />
+        <option value="$PROJECT_DIR$/myCaptcha.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/SSD.py" />
+        <option value="$PROJECT_DIR$/output.txt" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/Resnet/main.py" />
+        <option value="$PROJECT_DIR$/SSD/main.py" />
+        <option value="$PROJECT_DIR$/Resnet/armine.py" />
+        <option value="$PROJECT_DIR$/armine.py" />
+        <option value="$PROJECT_DIR$/Resnet/test.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1100" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Captcha-Crack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Captcha-Crack" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Captcha-Crack" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Captcha-Crack" type="462c0819:PsiDirectoryNode" />
+              <item name="Resnet" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/armine.py" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GitHub\Captcha-Crack" />
+      <recent name="E:\GitHub\Captcha-Crack\SSD" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GitHub\Captcha-Crack" />
+      <recent name="E:\GitHub\Captcha-Crack\asset" />
+      <recent name="E:\GitHub\Captcha-Crack\asset\dataset" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration name="armine" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Captcha-Crack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/armine.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Captcha-Crack" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Resnet" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Resnet/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.armine" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b41cba30-7e5b-40b4-aa3f-12e0b8ad3629" name="Default Changelist" comment="" />
+      <created>1594606137506</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594606137506</updated>
+      <workItem from="1594606138694" duration="102000" />
+      <workItem from="1594606270918" duration="80000" />
+      <workItem from="1594606353026" duration="929000" />
+      <workItem from="1594608338306" duration="21000" />
+      <workItem from="1594624369806" duration="137000" />
+      <workItem from="1594689803936" duration="3674000" />
+      <workItem from="1594701229129" duration="8505000" />
+      <workItem from="1594774267788" duration="167000" />
+      <workItem from="1594795531619" duration="9858000" />
+      <workItem from="1594860672112" duration="28322000" />
+      <workItem from="1595223135269" duration="6135000" />
+      <workItem from="1595230888004" duration="646000" />
+      <workItem from="1595234633678" duration="4953000" />
+      <workItem from="1595292461091" duration="13906000" />
+      <workItem from="1595378786199" duration="136000" />
+      <workItem from="1595467001001" duration="16169000" />
+      <workItem from="1595570499634" duration="127000" />
+      <workItem from="1595574749682" duration="5918000" />
+      <workItem from="1595584346089" duration="614000" />
+      <workItem from="1595808159973" duration="7438000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="107837000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11461126" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.38739946" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32037532" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.5536193" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3297587" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Captcha_Crack$im2rec.coverage" NAME="im2rec Coverage Results" MODIFIED="1594888799819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Captcha_Crack$myCaptcha.coverage" NAME="myCaptcha Coverage Results" MODIFIED="1595314269397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Captcha_Crack$SSD.coverage" NAME="SSD Coverage Results" MODIFIED="1595315085230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Captcha_Crack$test.coverage" NAME="test Coverage Results" MODIFIED="1595820161494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Resnet" />
+    <SUITE FILE_PATH="coverage/Captcha_Crack$main.coverage" NAME="main Coverage Results" MODIFIED="1595314313224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Captcha_Crack$armine.coverage" NAME="armine Coverage Results" MODIFIED="1595811063835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/dataset.py" />
+    <entry file="file://$PROJECT_DIR$/cnn.py" />
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/image/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="170" column="16" lean-forward="true" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asset/imgset/1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asset/imgset/2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asset/imgset/3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asset/imgset/4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/recordio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="343" selection-start-line="343" selection-end-line="343" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.idx" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_breakpoints.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/ntpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-2036615904/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="521" column="4" selection-start-line="521" selection-start-column="4" selection-end-line="521" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/nn/basic_layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1278">
+          <caret line="329" column="8" selection-start-line="329" selection-start-column="8" selection-end-line="329" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/_ctypes/ndarray.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asset/imgset/0.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#984#1090#0" />
+            <element signature="e#1173#1475#0" />
+            <element signature="e#1330#1385#0" />
+            <element signature="e#1503#1601#0" />
+            <element signature="e#1640#1857#0" />
+            <element signature="e#1890#3837#0" />
+            <element signature="e#1890#2819#1" />
+            <element signature="e#2875#3430#0" />
+            <element signature="e#2916#3430#0" />
+            <element signature="e#2956#3389#0" />
+            <element signature="e#3463#3702#0" />
+            <element signature="e#3480#3701#0" />
+            <element signature="e#3863#5049#0" />
+            <element signature="e#3863#4944#1" />
+            <element signature="e#5088#6010#0" />
+            <element signature="e#5088#5504#1" />
+            <element signature="e#5589#5664#0" />
+            <element signature="e#5699#5813#0" />
+            <element signature="e#5868#6010#0" />
+            <element signature="e#6044#8788#0" />
+            <element signature="e#6044#8752#1" />
+            <element signature="e#8862#9266#0" />
+            <element signature="e#9093#9266#0" />
+            <element signature="e#9297#12066#0" />
+            <element signature="e#9297#11052#1" />
+            <element signature="e#11092#11684#0" />
+            <element signature="e#11293#11664#0" />
+            <element signature="e#11342#11588#0" />
+            <element signature="e#11718#11897#0" />
+            <element signature="e#11795#11867#0" />
+            <element signature="e#11916#12066#0" />
+            <element signature="e#11932#12041#0" />
+            <element signature="e#12142#12368#0" />
+            <element signature="e#12188#12368#0" />
+            <element signature="e#12229#12368#0" />
+            <element signature="e#12399#12746#0" />
+            <element signature="e#12399#12612#1" />
+            <element signature="e#12646#12725#0" />
+            <element signature="e#12785#13663#0" />
+            <element signature="e#12785#13065#1" />
+            <element signature="e#13185#13247#0" />
+            <element signature="e#13282#13528#0" />
+            <element signature="e#13583#13663#0" />
+            <element signature="e#13697#14754#0" />
+            <element signature="e#13697#14718#1" />
+            <element signature="e#14780#15782#0" />
+            <element signature="e#14780#15659#1" />
+            <element signature="e#15813#18730#0" />
+            <element signature="e#15813#17717#1" />
+            <element signature="e#17756#18348#0" />
+            <element signature="e#17957#18328#0" />
+            <element signature="e#18006#18252#0" />
+            <element signature="e#18382#18561#0" />
+            <element signature="e#18459#18531#0" />
+            <element signature="e#18580#18730#0" />
+            <element signature="e#18596#18705#0" />
+            <element signature="e#18755#20830#0" />
+            <element signature="e#18755#20786#1" />
+            <element signature="e#20876#22032#0" />
+            <element signature="e#20876#21394#1" />
+            <element signature="e#21576#21626#0" />
+            <element signature="e#21660#21951#0" />
+            <element signature="e#21709#21949#0" />
+            <element signature="e#22069#23573#0" />
+            <element signature="e#22069#22395#1" />
+            <element signature="e#22480#23542#0" />
+            <element signature="e#22513#23510#0" />
+            <element signature="e#22563#23510#0" />
+            <element signature="e#22951#23510#0" />
+            <element signature="e#23118#23281#0" />
+            <element signature="e#23611#24979#0" />
+            <element signature="e#23611#23939#1" />
+            <element signature="e#24030#24947#0" />
+            <element signature="e#24063#24910#0" />
+            <element signature="e#24113#24910#0" />
+            <element signature="e#24501#24910#0" />
+            <element signature="e#25013#25946#0" />
+            <element signature="e#25013#25429#1" />
+            <element signature="e#25485#25832#0" />
+            <element signature="e#25526#25832#0" />
+            <element signature="e#25566#25791#0" />
+            <element signature="e#25989#28913#0" />
+            <element signature="e#25989#28742#1" />
+            <element signature="e#28936#29039#0" />
+            <element signature="e#29104#31140#0" />
+            <element signature="e#29104#29569#1" />
+            <element signature="e#29611#29753#0" />
+            <element signature="e#29628#29735#0" />
+            <element signature="e#29851#29972#0" />
+            <element signature="e#30279#30462#0" />
+            <element signature="e#30565#30754#0" />
+            <element signature="e#30889#31092#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/image/detection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="627" lean-forward="true" selection-start-line="627" selection-end-line="627" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#1526#2251#0" />
+            <element signature="e#1599#1845#0" />
+            <element signature="e#1675#1845#0" />
+            <element signature="e#1795#1845#0" />
+            <element signature="e#1876#2104#0" />
+            <element signature="e#1876#2029#1" />
+            <element signature="e#2150#2251#0" />
+            <element signature="e#2292#3125#0" />
+            <element signature="e#2292#2568#1" />
+            <element signature="e#2612#2823#0" />
+            <element signature="e#2854#2982#0" />
+            <element signature="e#3028#3125#0" />
+            <element signature="e#3172#4362#0" />
+            <element signature="e#3172#3479#1" />
+            <element signature="e#3535#3961#0" />
+            <element signature="e#3724#3829#0" />
+            <element signature="e#3992#4100#0" />
+            <element signature="e#4146#4362#0" />
+            <element signature="e#4285#4362#0" />
+            <element signature="e#4411#5020#0" />
+            <element signature="e#4411#4524#1" />
+            <element signature="e#4560#4626#0" />
+            <element signature="e#4672#4842#0" />
+            <element signature="e#4752#4814#0" />
+            <element signature="e#4886#5020#0" />
+            <element signature="e#5065#12778#0" />
+            <element signature="e#5065#6213#1" />
+            <element signature="e#6385#8052#0" />
+            <element signature="e#6451#6704#0" />
+            <element signature="e#6771#6952#0" />
+            <element signature="e#7884#8006#0" />
+            <element signature="e#8098#8344#0" />
+            <element signature="e#8240#8316#0" />
+            <element signature="e#8393#8583#0" />
+            <element signature="e#8651#9119#0" />
+            <element signature="e#9217#9971#0" />
+            <element signature="e#10043#10875#0" />
+            <element signature="e#10944#12778#0" />
+            <element signature="e#11249#12760#0" />
+            <element signature="e#11517#11635#0" />
+            <element signature="e#11792#11876#0" />
+            <element signature="e#12065#12142#0" />
+            <element signature="e#12191#12268#0" />
+            <element signature="e#12600#12760#0" />
+            <element signature="e#12822#17131#0" />
+            <element signature="e#12822#13506#1" />
+            <element signature="e#13654#15223#0" />
+            <element signature="e#13709#13782#0" />
+            <element signature="e#13857#14109#0" />
+            <element signature="e#14176#14356#0" />
+            <element signature="e#15056#15177#0" />
+            <element signature="e#15269#15560#0" />
+            <element signature="e#15417#15532#0" />
+            <element signature="e#15631#15876#0" />
+            <element signature="e#15944#17131#0" />
+            <element signature="e#16256#17113#0" />
+            <element signature="e#17373#20298#0" />
+            <element signature="e#17373#19351#1" />
+            <element signature="e#19394#19827#0" />
+            <element signature="e#19503#19622#0" />
+            <element signature="e#19709#19801#0" />
+            <element signature="e#19743#19801#0" />
+            <element signature="e#19867#19992#0" />
+            <element signature="e#20071#20241#0" />
+            <element signature="e#20744#26357#0" />
+            <element signature="e#20744#24337#1" />
+            <element signature="e#24476#24761#0" />
+            <element signature="e#24934#25126#0" />
+            <element signature="e#25520#25803#0" />
+            <element signature="e#25587#25725#0" />
+            <element signature="e#29626#30092#0" />
+            <element signature="e#29730#29835#0" />
+            <element signature="e#31748#32479#0" />
+            <element signature="e#31748#32041#1" />
+            <element signature="e#32089#32256#0" />
+            <element signature="e#32305#32479#0" />
+            <element signature="e#32548#33819#0" />
+            <element signature="e#32747#33713#0" />
+            <element signature="e#32785#33713#0" />
+            <element signature="e#32896#33105#0" />
+            <element signature="e#33168#33250#0" />
+            <element signature="e#33308#33713#0" />
+            <element signature="e#33756#33801#0" />
+            <element signature="e#33849#35734#0" />
+            <element signature="e#34071#34396#0" />
+            <element signature="e#34423#34816#0" />
+            <element signature="e#34457#34520#0" />
+            <element signature="e#34555#34610#0" />
+            <element signature="e#34955#35667#0" />
+            <element signature="e#35231#35380#0" />
+            <element signature="e#35564#35667#0" />
+            <element signature="e#35831#36002#0" />
+            <element signature="e#36058#36652#0" />
+            <element signature="e#36267#36425#0" />
+            <element signature="e#36496#36652#0" />
+            <element signature="e#36817#41108#0" />
+            <element signature="e#36817#38083#1" />
+            <element signature="e#38165#38247#0" />
+            <element signature="e#38291#41029#0" />
+            <element signature="e#38319#41029#0" />
+            <element signature="e#38430#38513#0" />
+            <element signature="e#38576#38658#0" />
+            <element signature="e#39820#40869#0" />
+            <element signature="e#40285#40869#0" />
+            <element signature="e#40387#40869#0" />
+            <element signature="e#40930#41001#0" />
+            <element signature="e#41072#41108#0" />
+            <element signature="e#41169#42850#0" />
+            <element signature="e#41169#42122#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/image/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/numpy_extension/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/contrib/ndarray.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-275" />
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/numpy_extension/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-2036615904/cv2/cv2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1045">
+          <caret line="7544" column="4" selection-start-line="7544" selection-start-column="4" selection-end-line="7544" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out.png" />
+    <entry file="file://$PROJECT_DIR$/main.py" />
+    <entry file="file://D:/Anaconda3/Lib/site-packages/gluoncv/utils/viz/bbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-975">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/street_small.jpg" />
+    <entry file="file://D:/Anaconda3/Lib/site-packages/gluoncv/data/transforms/presets/ssd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1372">
+          <caret line="127" column="8" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/gluoncv/data/pascal_voc/detection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+          <folding>
+            <element signature="e#386#1736#1" />
+            <element signature="e#6550#7503#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSD.py" />
+    <entry file="file://$PROJECT_DIR$/test.py" />
+    <entry file="file://$PROJECT_DIR$/output.txt" />
+    <entry file="file://$PROJECT_DIR$/SSD/im2rec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/gluoncv/data/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding>
+            <element signature="e#28#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/captcha/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/captcha/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="108" column="55" lean-forward="true" selection-start-line="108" selection-start-column="23" selection-end-line="108" selection-end-column="55" />
+          <folding>
+            <element signature="e#137#146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSD/myCaptcha.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="32" column="68" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="32" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#1226#1485#1" />
+            <element signature="e#1702#2758#0" />
+            <element signature="e#2528#2629#0" />
+            <element signature="e#2816#3005#0" />
+            <element signature="e#2858#2928#0" />
+            <element signature="e#3355#3793#0" />
+            <element signature="e#3502#3639#0" />
+            <element signature="e#3839#4046#0" />
+            <element signature="e#3977#4046#0" />
+            <element signature="e#4087#4234#0" />
+            <element signature="e#4121#4234#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSD/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="20" column="47" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="20" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SSD/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1935" />
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/data/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/data/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/numpy/multiarray.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/data/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="655" column="77" selection-start-line="655" selection-start-column="77" selection-end-line="655" selection-end-column="77" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#1480#1817#0" />
+            <element signature="e#1516#1679#0" />
+            <element signature="e#1719#1817#0" />
+            <element signature="e#1828#2677#0" />
+            <element signature="e#1880#2201#0" />
+            <element signature="e#2241#2677#0" />
+            <element signature="e#2792#3142#0" />
+            <element signature="e#2831#2998#0" />
+            <element signature="e#3041#3142#0" />
+            <element signature="e#3153#4015#0" />
+            <element signature="e#3208#3533#0" />
+            <element signature="e#3576#4015#0" />
+            <element signature="e#4115#4711#0" />
+            <element signature="e#4252#4269#0" />
+            <element signature="e#4304#4451#0" />
+            <element signature="e#4481#4566#0" />
+            <element signature="e#4609#4711#0" />
+            <element signature="e#4761#5308#0" />
+            <element signature="e#4889#5308#0" />
+            <element signature="e#5001#5120#0" />
+            <element signature="e#5370#5997#0" />
+            <element signature="e#5370#5510#1" />
+            <element signature="e#5560#5997#0" />
+            <element signature="e#5678#5809#0" />
+            <element signature="e#6035#6447#0" />
+            <element signature="e#6223#6294#0" />
+            <element signature="e#6313#6447#0" />
+            <element signature="e#6488#7254#0" />
+            <element signature="e#6599#6919#0" />
+            <element signature="e#6965#7039#0" />
+            <element signature="e#7058#7254#0" />
+            <element signature="e#7292#7513#0" />
+            <element signature="e#7585#7827#0" />
+            <element signature="e#7659#7827#0" />
+            <element signature="e#7957#8464#0" />
+            <element signature="e#8054#8464#0" />
+            <element signature="e#8350#8413#0" />
+            <element signature="e#8505#11823#0" />
+            <element signature="e#8718#10021#0" />
+            <element signature="e#9367#9621#0" />
+            <element signature="e#9751#9855#0" />
+            <element signature="e#10054#10085#0" />
+            <element signature="e#10118#10133#0" />
+            <element signature="e#10169#10366#0" />
+            <element signature="e#10400#10945#0" />
+            <element signature="e#10528#10662#0" />
+            <element signature="e#10696#10945#0" />
+            <element signature="e#10752#10945#0" />
+            <element signature="e#10975#10997#0" />
+            <element signature="e#11031#11042#0" />
+            <element signature="e#11076#11823#0" />
+            <element signature="e#11181#11823#0" />
+            <element signature="e#11181#11244#0" />
+            <element signature="e#11739#11789#0" />
+            <element signature="e#11858#16238#0" />
+            <element signature="e#11858#13857#1" />
+            <element signature="e#14084#15504#0" />
+            <element signature="e#14237#14859#0" />
+            <element signature="e#14276#14396#0" />
+            <element signature="e#14293#14395#0" />
+            <element signature="e#14445#14616#0" />
+            <element signature="e#14987#15137#0" />
+            <element signature="e#15004#15136#0" />
+            <element signature="e#15294#15446#0" />
+            <element signature="e#15538#16174#0" />
+            <element signature="e#15577#15935#0" />
+            <element signature="e#15618#15896#0" />
+            <element signature="e#15672#15896#0" />
+            <element signature="e#16207#16238#0" />
+            <element signature="e#16305#16389#0" />
+            <element signature="e#16481#16822#0" />
+            <element signature="e#16523#16599#0" />
+            <element signature="e#16880#17357#0" />
+            <element signature="e#16938#16971#0" />
+            <element signature="e#17417#17524#0" />
+            <element signature="e#17562#20388#0" />
+            <element signature="e#17836#18389#0" />
+            <element signature="e#18422#18453#0" />
+            <element signature="e#18489#18810#0" />
+            <element signature="e#18844#20291#0" />
+            <element signature="e#18919#19025#0" />
+            <element signature="e#19293#19621#0" />
+            <element signature="e#19687#20205#0" />
+            <element signature="e#19693#19872#0" />
+            <element signature="e#19994#20164#0" />
+            <element signature="e#20001#20164#0" />
+            <element signature="e#20244#20291#0" />
+            <element signature="e#20321#20343#0" />
+            <element signature="e#20377#20388#0" />
+            <element signature="e#27532#27563#0" />
+            <element signature="e#27596#27872#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/data/vision/datasets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#961#970#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/numpy/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="298" column="4" selection-start-line="298" selection-start-column="4" selection-end-line="298" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="1757" selection-start-line="1757" selection-end-line="1757" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resnet/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/gluon/loss.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="374" selection-start-line="374" selection-end-line="374" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3/Lib/site-packages/mxnet/context.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="196" selection-start-line="196" selection-end-line="196" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/armine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="221" column="23" selection-start-line="221" selection-start-column="23" selection-end-line="221" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+            <element signature="e#198#226#1" />
+            <element signature="e#348#419#0" />
+            <element signature="e#1010#1563#0" />
+            <element signature="e#1075#1277#0" />
+            <element signature="e#1599#1703#0" />
+            <element signature="e#1794#2758#0" />
+            <element signature="e#1888#2758#0" />
+            <element signature="e#2262#2528#0" />
+            <element signature="e#2555#2758#0" />
+            <element signature="e#2811#3077#0" />
+            <element signature="e#2947#3077#0" />
+            <element signature="e#3174#3396#0" />
+            <element signature="e#3434#4139#0" />
+            <element signature="e#3516#3932#0" />
+            <element signature="e#3978#4139#0" />
+            <element signature="e#4172#4903#0" />
+            <element signature="e#4406#4677#0" />
+            <element signature="e#4485#4658#0" />
+            <element signature="e#4927#5038#0" />
+            <element signature="e#5071#5370#0" />
+            <element signature="e#5144#5165#0" />
+            <element signature="e#5200#5250#0" />
+            <element signature="e#5280#5312#0" />
+            <element signature="e#5351#5370#0" />
+            <element signature="e#5400#5579#0" />
+            <element signature="e#5638#5998#0" />
+            <element signature="e#5870#5967#0" />
+            <element signature="e#6975#7172#0" />
+            <element signature="e#7102#7170#0" />
+            <element signature="e#7199#7319#0" />
+            <element signature="e#7414#7532#0" />
+            <element signature="e#7632#7810#0" />
+            <element signature="e#8239#8437#0" />
+            <element signature="e#8470#8492#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resnet/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
