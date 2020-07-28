@@ -1,7 +1,7 @@
 from mxnet import autograd, gluon, init, npx, image, np
 from mxnet.gluon import nn, data
 from mxnet.gluon.data import dataset
-import pandas as pd
+import config
 import time
 import os
 import shutil
@@ -187,16 +187,19 @@ class CapDataset(dataset.Dataset):
 
     def _read(self):
         self.items = []
-        with open(os.path.join(self._label_list, "label.txt"), "r") as f:
+        with open(os.path.join(self._label_list, config.LABEL_NAME), "r") as f:
             lines = f.readlines()
             labels = [l.rstrip() for l in lines]
         name_list = os.listdir(self._img_list)
         for i, filename in enumerate(name_list):
-            self.items.append((os.path.join(self._img_list, filename), int(labels[i])))
+            self.items.append((os.path.join(self._img_list, filename), labels[i]))
 
     def __getitem__(self, idx):
         img = image.imread(self.items[idx][0], self._flag)
+        # resize成2次幂的整数倍方便处理
+        img = image.imresize(img, w=128, h=64)
         label = self.items[idx][1]
+        label = str2vec(label)
         if self._transform is not None:
             return self._transform(img, label)
         return img, label
@@ -204,6 +207,13 @@ class CapDataset(dataset.Dataset):
     def __len__(self):
         return len(self.items)
 
+
+def str2vec(src):
+    vec = np.zeros((len(src)))
+    for i, s in enumerate(src):
+        pos = config.DICTSET.index(s)
+        vec[i] = pos
+    return vec
 
 def encoder(en_in, num_classes, c_len, ctx):
     vector = np.zeros((en_in.shape[0], c_len * num_classes), ctx=ctx)
@@ -217,18 +227,19 @@ def encoder(en_in, num_classes, c_len, ctx):
             vector[i, j*num_classes+ss] = 1
     return vector
 
-def decode_loss(y, y_hat, num_classes, c_len, loss):
-    y = y.reshape((y.shape[0], c_len, 10))
-    y = y.argmax(axis=2)
-    y_hat = y_hat.reshape((y_hat.shape[0], c_len, num_classes))
-    l = loss(y_hat, y).sum()
-    return l
+def loss_acc(y_hat, y, loss):
+    # y_hat:(c_len, batch_size, num_classes) --> (4, 64, 10)
+    # y:(batch_size, c_len)
+    l, acc = [], 0
+    for i, y_ in enumerate(y_hat):
+        l.append(loss(y_, y[:, i]).sum())
+        acc += float((y_.argmax(axis=1) == y[:, i]).sum())
+    return l, acc
 
 if __name__ == '__main__':
-    y_hat = np.random.rand(8, 40)
-    y = np.random.rand(8, 40)
-    print(y_hat)
-    print(y)
+    y = np.array([[0, 1]])
+    y_hat = np.array([[[0.1, 0.2, 0.3]],
+                      [[0.1, 0.3, 0.2]]])
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
-    l = decode_loss(y, y_hat, 10, 4, loss)
-    print(l)
+    l, acc = loss_acc(y_hat, y, loss)
+    print(l, acc, acc/y.size)

@@ -1,7 +1,7 @@
 from SSD import im2rec as i2r, myCaptcha as cha
 import numpy as np
 import random
-from . import config
+import config
 
 if __name__ == "__main__":
     # '''******************************  Step-1 Generate images and labels  *********************************'''
