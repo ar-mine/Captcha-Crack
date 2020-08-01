@@ -1,0 +1,1 @@
+E:\C++Project\ncnnTest\x64\Release\ncnnTest.exe

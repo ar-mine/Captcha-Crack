@@ -1,0 +1,9 @@
+﻿  main.cpp
+E:\C++Lib\ncnn-master\build-vs2019\install\include\ncnn\mat.h(1270,50): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+E:\C++Project\ncnnTest\main.cpp(59,33): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  正在生成代码
+  11 of 133 functions ( 8.3%) were compiled, the rest were copied from previous compilation.
+    10 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  ncnnTest.vcxproj -> E:\C++Project\ncnnTest\x64\Release\ncnnTest.exe
